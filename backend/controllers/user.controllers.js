@@ -28,12 +28,10 @@ const userLogUp = async (req, res) => {
     "--password --refreshToken"
   )
   if (!createdUser)
-    throw new ApiError(500, "something went wrong while registering hte user")
-
+    res.status(500).json({"message":"Could not create user"})
   console.log(createdUser)
   return res.status(201).json(
-    new ApiResponse(200, "User Registerd Successfully")
-  )
+    {"message":"User Registerd Successfully"})
 }
 
 const userLogin = async (req, res) => {
@@ -43,8 +41,8 @@ const userLogin = async (req, res) => {
   if (!password || password === "")
     res.status(400).json({ "message": "Password is required" })
 
-  const user = User.findOne({
-    $or: [{ email }]
+  const user = await User.findOne({
+    email:email
   })
 
   if (!user)
@@ -133,6 +131,7 @@ const userLogin = async (req, res) => {
 // };
 
 const getPlatformUserData = async (req, res) => {
+  const {username}=req.body
   const userResponseData = {
     leetcode: {
       totalQuestionSolved: 0,
@@ -146,14 +145,23 @@ const getPlatformUserData = async (req, res) => {
     }
   };
 
+  const user=await User.findOne({username:username})
+  if(!user)
+    res.status(500).json({"message":"Something went wrong"})
+
   // Accessing the username of this user for different platforms
-  const leetData = fakeData.platformProfiles["leetcode"];
-  const chefData = fakeData.platformProfiles["codechef"];
+  let leetData = user.platformProfiles.leetcode;
+  let chefData = user.platformProfiles.codechef;
+
+  if(leetData===undefined)
+    leetData={isId:false}
+  if(chefData===undefined)
+    chefData={isId:false}
 
   try {
     if (leetData.isId) {
-      const username = leetData.username;
-
+      const username = leetData.platid;
+      
       const solvedResponse = await fetch(`https://alfa-leetcode-api.onrender.com/${username}/solved`, {
         method: 'GET',
         headers: {
@@ -163,6 +171,7 @@ const getPlatformUserData = async (req, res) => {
 
       if (solvedResponse.ok) {
         const solvedData = await solvedResponse.json();
+        // console.log(solvedData)
         if (solvedData.solvedProblem) {
           userResponseData.leetcode.totalQuestionSolved = solvedData.solvedProblem;
         } else {
@@ -192,11 +201,12 @@ const getPlatformUserData = async (req, res) => {
         console.error('Error fetching solved problems data');
       }
     }
+    // console.log(userResponseData)
 
     if (chefData.isId) {
       const getChefData = async () => {
         try {
-          const username = chefData.username;
+          const username = chefData.platid;
           const { data } = await axios.get(`https://www.codechef.com/users/${username}`);
           const $ = cheerio.load(data);
 
@@ -227,7 +237,31 @@ const getPlatformUserData = async (req, res) => {
   }
 };
 
-export { userLogUp, userLogin, getPlatformUserData }
+
+const addProfile=async(req,res)=>{
+  const{ username, platform,platid}=req.body
+  if(!username || !platform || !platid)
+  res.status(400).json({"message":"Did not receive all credentials"})
+
+  const user = await User.findOneAndUpdate(
+    { username:username },
+    {
+      $set: {
+        [`platformProfiles.${platform}`]: {
+          platid,
+          isId:true
+        }
+      }
+    },
+    { new: true } // Return the updated user
+  );
+  console.log(user)
+  if(!user)
+  res.status(500).json({"message":"something went wrong"})
+  res.status(200).json({"message":"profile added successfully"})
+}
+
+export { userLogUp, userLogin, getPlatformUserData,addProfile }
 
 
 

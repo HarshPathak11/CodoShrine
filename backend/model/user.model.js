@@ -15,7 +15,12 @@ const userSchema= new mongoose.Schema({
     password:{
         type:String,
         required:true
-    }
+    },
+    platformProfiles: {
+    type: Object,
+    default: {} // Initialize with an empty object
+  }
+
 })
 // mongoose hooks 
 userSchema.pre("save", async function(next){
