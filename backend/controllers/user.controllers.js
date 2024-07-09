@@ -163,7 +163,11 @@ const getPlatformUserData = async (req, res) => {
 
       if (solvedResponse.ok) {
         const solvedData = await solvedResponse.json();
-        userResponseData.leetcode.totalQuestionSolved = solvedData.solvedProblem;
+        if (solvedData.solvedProblem) {
+          userResponseData.leetcode.totalQuestionSolved = solvedData.solvedProblem;
+        } else {
+          userResponseData.leetcode.totalQuestionSolved = 0;
+        }
 
         const contestResponse = await fetch(`https://alfa-leetcode-api.onrender.com/${username}/contest`, {
           method: 'GET',
@@ -174,9 +178,13 @@ const getPlatformUserData = async (req, res) => {
 
         if (contestResponse.ok) {
           const contestData = await contestResponse.json();
-          console.log(contestData.contestRating)
-          userResponseData.leetcode.totalContestsParticipated = contestData.contestAttend;
-          userResponseData.leetcode.contestRating = contestData.contestRating;
+          if (contestData.contestParticipation.length) {
+            userResponseData.leetcode.contestRating = contestData.contestRating;
+            userResponseData.leetcode.totalContestsParticipated = contestData.contestAttend;
+          }else{
+            userResponseData.leetcode.contestRating = 0;
+            userResponseData.leetcode.totalContestsParticipated = 0;
+          }
         } else {
           console.error('Error fetching contest data');
         }
