@@ -1,0 +1,111 @@
+import React, { useState } from 'react';
+import { FaCalendarAlt } from 'react-icons/fa';
+import CalendarView from './CalendarView';
+import Table from './table';
+
+
+const UpcomingContestPage = () => {
+    const contests = [
+        { platform: 'Codeforces', contest: 'Codeforces Round #690', date: '2024-07-12', time: '17:00 UTC' },
+        { platform: 'LeetCode', contest: 'Weekly Contest 250', date: '2024-07-13', time: '14:30 UTC' },
+        { platform: 'AtCoder', contest: 'AtCoder Beginner Contest 200', date: '2024-07-14', time: '12:00 UTC' },
+        { platform: 'HackerRank', contest: 'Week of Code 40', date: '2024-07-15', time: '10:00 UTC' },
+        { platform: 'Codeforces', contest: 'Codeforces Round #691', date: '2024-07-18', time: '18:00 UTC' },
+        { platform: 'LeetCode', contest: 'Biweekly Contest 55', date: '2024-07-20', time: '15:00 UTC' },
+        { platform: 'AtCoder', contest: 'AtCoder Grand Contest 50', date: '2024-07-21', time: '13:00 UTC' },
+        { platform: 'HackerRank', contest: 'CodeSprint 10', date: '2024-07-22', time: '11:00 UTC' },
+        { platform: 'Codeforces', contest: 'Codeforces Round #692', date: '2024-07-25', time: '17:30 UTC' },
+        { platform: 'LeetCode', contest: 'Weekly Contest 251', date: '2024-07-27', time: '14:00 UTC' },
+        { platform: 'AtCoder', contest: 'AtCoder Beginner Contest 201', date: '2024-07-28', time: '12:30 UTC' },
+        { platform: 'HackerRank', contest: 'HourRank 34', date: '2024-07-29', time: '09:00 UTC' },
+        { platform: 'Codeforces', contest: 'Codeforces Round #693', date: '2024-08-01', time: '16:00 UTC' },
+        { platform: 'LeetCode', contest: 'Biweekly Contest 56', date: '2024-08-03', time: '15:30 UTC' },
+        { platform: 'AtCoder', contest: 'AtCoder Grand Contest 51', date: '2024-08-04', time: '11:00 UTC' },
+        { platform: 'HackerRank', contest: 'Week of Code 41', date: '2024-08-05', time: '08:00 UTC' }
+    ];
+
+    const [searchTerm, setSearchTerm] = useState('');
+    const [selectedPlatform, setSelectedPlatform] = useState('');
+    const [view, setView] = useState('table'); // 'table' or 'calendar'
+
+    return (
+        <div className="min-h-screen bg-gray-900 text-white">
+            <nav className="fixed z-10 top-0 w-full transition-all duration-300 bg-gray-800">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="flex items-center justify-between h-16">
+                        <div className="flex items-center">
+                            <div className="text-white text-xl font-bold">CodeShrine</div>
+                        </div>
+                        <div className="hidden md:block">
+                            <div className="ml-10 flex items-baseline space-x-4">
+                                <a href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                                    Home
+                                </a>
+                                <a href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                                    Upcoming Contests
+                                </a>
+                                <a href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                                    Profile
+                                </a>
+                                <a href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                                    About
+                                </a>
+                                <a href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                                    Contact
+                                </a>
+                            </div>
+                        </div>
+                        <div className="hidden md:block">
+                            <div className="ml-4 flex items-center md:ml-6">
+                                <a href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                                    Login/Signup
+                                </a>
+                                <a href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                                    User Dashboard
+                                </a>
+                                <a href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                                    Settings
+                                </a>
+                                <a href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                                    Logout
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <div className="max-w-4xl w-full space-y-8 py-12 px-4 sm:px-6 lg:px-8 mx-auto">
+                <div className="text-center">
+                    <h2 className="mt-6 text-3xl font-extrabold">Upcoming Programming Contests</h2>
+                    <p className="mt-2 text-sm text-gray-600">Stay updated with the latest contests from various platforms</p>
+                </div>
+                <div className="flex justify-between items-center mb-4">
+                    <input
+                        type="text"
+                        placeholder="Search Contests"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        className="px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300 w-64 md:w-auto"
+                    />
+                    <select
+                        value={selectedPlatform}
+                        onChange={(e) => setSelectedPlatform(e.target.value)}
+                        className="px-4 text-black py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
+                    >
+                        <option value="">All Platforms</option>
+                        <option value="Codeforces">Codeforces</option>
+                        <option value="LeetCode">LeetCode</option>
+                        <option value="AtCoder">AtCoder</option>
+                        <option value="HackerRank">HackerRank</option>
+                    </select>
+
+                </div>
+                <Table contests={contests} searchTerm={searchTerm} selectedPlatform={selectedPlatform} />
+            </div>
+        </div>
+    );
+};
+
+
+export default UpcomingContestPage;
