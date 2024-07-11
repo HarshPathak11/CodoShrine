@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FaCode, FaBell, FaLaptop, FaUser, FaEnvelope } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const HomePage = () => {
   const [navbarSolid, setNavbarSolid] = useState(false);
@@ -29,37 +30,25 @@ const HomePage = () => {
             </div>
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-4">
-                <a href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                <Link to="/"><a href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                   Home
-                </a>
-                <a href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                </a></Link>
+                <Link  to="/cal" ><a href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                   Upcoming Contests
-                </a>
-                <a href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                </a></Link>
+                <Link to="/login"><a href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                   Profile
-                </a>
+                </a></Link>
                 <a href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                   About
-                </a>
-                <a href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                  Contact
                 </a>
               </div>
             </div>
             <div className="hidden md:block">
               <div className="ml-4 flex items-center md:ml-6">
-                <a href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                <Link to="/login"><a href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                   Login/Signup
-                </a>
-                <a href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                  User Dashboard
-                </a>
-                <a href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                  Settings
-                </a>
-                <a href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                  Logout
-                </a>
+                </a></Link>
               </div>
             </div>
           </div>
@@ -74,15 +63,15 @@ const HomePage = () => {
           <div className="flex flex-wrap items-center">
             <div className="w-full md:w-6/12 px-4 ml-auto mr-auto text-center">
               <div className="">
-                <h1 className="text-white font-semibold text-5xl m-2">
+                <h1 className="text-white font-semibold text-4xl m-2">
                   Welcome to CodeShrine
                 </h1>
                 <p className="m-4 text-lg text-gray-300">
                   Your one-stop platform to track and showcase your coding progress.
                 </p>
-                <button className="mt-4 bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700">
+                <Link to="/register"><button className="mt-4 bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700">
                   Sign Up Now
-                </button>
+                </button></Link>
               </div>
             </div>
             <div className="mt-12 w-full md:w-6/12 px-4 ml-auto mr-auto flex justify-center">
@@ -96,7 +85,7 @@ const HomePage = () => {
         </div>
       </header>
 
-      <section className="bg-gray-800 py-20">
+      {/* <section className="bg-gray-800 py-20">
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap justify-center text-center mb-24">
             <div className="w-full lg:w-6/12 px-4">
@@ -112,15 +101,14 @@ const HomePage = () => {
                 <h4 className="text-xl font-semibold text-white mb-2">Codeforces Round #690</h4>
                 <p className="text-gray-400 mb-2">Date: 2024-07-12</p>
                 <p className="text-gray-400 mb-2">Time: 17:00 UTC</p>
-                <a href="#" className="text-blue-500 hover:text-blue-600 font-medium">
+                <Link to="/cal"><a href="#" className="text-blue-500 hover:text-blue-600 font-medium">
                   View All Contests
-                </a>
+                </a></Link>
               </div>
             </div>
-            {/* Add more contest cards here */}
           </div>
         </div>
-      </section>
+      </section> */}
 
       <section className="pt-20 pb-48">
         <div className="container mx-auto px-4">
@@ -161,35 +149,7 @@ const HomePage = () => {
               </div>
             </div>
 
-            <div className="w-full md:w-4/12 px-4 text-center">
-              <div className="relative flex flex-col min-w-0 break-words bg-gray-800 w-full mb-8 shadow-lg rounded-lg">
-                <div className="px-4 py-5 flex-auto">
-                  <div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-green-500">
-                    <FaLaptop />
-                  </div>
-                  <h6 className="text-xl font-semibold">Show All Your Work at One Place</h6>
-                  <p className="mt-2 mb-4 text-gray-400">
-                    Integrate all your coding profiles to showcase your work seamlessly.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="flex items-center justify-center">
-            <div className="w-full md:w-4/12 px-4 text-center">
-              <div className="relative flex flex-col min-w-0 break-words bg-gray-800 w-full mb-8 shadow-lg rounded-lg">
-                <div className="px-4 py-5 flex-auto">
-                  <div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-red-500">
-                    <FaUser />
-                  </div>
-                  <h6 className="text-xl font-semibold">Connect with Fellow Coders</h6>
-                  <p className="mt-2 mb-4 text-gray-400">
-                    Engage and collaborate with a community of passionate coders.
-                  </p>
-                </div>
-              </div>
-            </div>
+            
 
             <div className="w-full md:w-4/12 px-4 text-center">
               <div className="relative flex flex-col min-w-0 break-words bg-gray-800 w-full mb-8 shadow-lg rounded-lg">

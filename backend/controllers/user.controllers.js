@@ -30,8 +30,7 @@ const userLogUp = async (req, res) => {
   if (!createdUser)
     res.status(500).json({"message":"Could not create user"})
   console.log(createdUser)
-  return res.status(201).json(
-    {"message":"User Registerd Successfully"})
+  return res.status(201).json(createdUser)
 }
 
 const userLogin = async (req, res) => {
@@ -51,7 +50,7 @@ const userLogin = async (req, res) => {
   const isPasswordOk = await user.isPasswordCorrect(password)
   if (!isPasswordOk)
     res.status(400).json({ "message": "Password Incorrect!" })
-  res.status(200).json({ "message": "user logged in" })
+  res.status(200).json(user)
 
 }
 

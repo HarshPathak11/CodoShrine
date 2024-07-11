@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { FaCalendarAlt } from 'react-icons/fa';
-import CalendarView from './CalendarView';
+// import CalendarView from './CalendarView';
 import Table from './table';
+import { Link } from 'react-router-dom';
 
 
 const UpcomingContestPage = () => {
@@ -28,70 +29,75 @@ const UpcomingContestPage = () => {
     const [selectedPlatform, setSelectedPlatform] = useState('');
     const [view, setView] = useState('table'); // 'table' or 'calendar'
 
+    const [navbarSolid, setNavbarSolid] = useState(false);
+
+  const handleScroll = () => {
+    if (window.scrollY > 50) {
+      setNavbarSolid(true);
+    } else {
+      setNavbarSolid(false);
+    }
+  };
+
+  React.useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
     return (
         <div className="min-h-screen bg-gray-900 text-white">
-            <nav className="fixed z-10 top-0 w-full transition-all duration-300 bg-gray-800">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex items-center justify-between h-16">
-                        <div className="flex items-center">
-                            <div className="text-white text-xl font-bold">CodeShrine</div>
-                        </div>
-                        <div className="hidden md:block">
-                            <div className="ml-10 flex items-baseline space-x-4">
-                                <a href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                                    Home
-                                </a>
-                                <a href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                                    Upcoming Contests
-                                </a>
-                                <a href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                                    Profile
-                                </a>
-                                <a href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                                    About
-                                </a>
-                                <a href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                                    Contact
-                                </a>
-                            </div>
-                        </div>
-                        <div className="hidden md:block">
-                            <div className="ml-4 flex items-center md:ml-6">
-                                <a href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                                    Login/Signup
-                                </a>
-                                <a href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                                    User Dashboard
-                                </a>
-                                <a href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                                    Settings
-                                </a>
-                                <a href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                                    Logout
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </nav>
+            <nav
+        className={`fixed z-10 top-0 w-full transition-all duration-300 ${navbarSolid ? 'bg-gray-800' : 'bg-gray-500 bg-opacity-50'}`}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            <div className="flex items-center">
+              <div className="text-white text-xl font-bold">CodeShrine</div>
+            </div>
+            <div className="hidden md:block">
+              <div className="ml-10 flex items-baseline space-x-4">
+                <Link to="/"><a href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                  Home
+                </a></Link>
+                <Link  to="/cal" ><a href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                  Upcoming Contests
+                </a></Link>
+                <Link to="/login"><a href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                  Profile
+                </a></Link>
+                <a href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                  About
+                </a>
+              </div>
+            </div>
+            <div className="hidden md:block">
+              <div className="ml-4 flex items-center md:ml-6">
+                <Link to="/login"><a href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                  Login/Signup
+                </a></Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
 
             <div className="max-w-4xl w-full space-y-8 py-12 px-4 sm:px-6 lg:px-8 mx-auto">
                 <div className="text-center">
-                    <h2 className="mt-6 text-3xl font-extrabold">Upcoming Programming Contests</h2>
+                    <h2 className="mt-10 text-3xl font-extrabold">Upcoming Programming Contests</h2>
                     <p className="mt-2 text-sm text-gray-600">Stay updated with the latest contests from various platforms</p>
                 </div>
-                <div className="flex justify-between items-center mb-4">
+                <div className="grid grid-flow-row md:grid-cols-2 mb-4">
                     <input
                         type="text"
                         placeholder="Search Contests"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        className="px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300 w-64 md:w-auto"
+                        className="px-4 m-2 text-black py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300 w-64 md:w-auto"
                     />
                     <select
                         value={selectedPlatform}
                         onChange={(e) => setSelectedPlatform(e.target.value)}
-                        className="px-4 text-black py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
+                        className="px-4 m-2 text-black py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
                     >
                         <option value="">All Platforms</option>
                         <option value="Codeforces">Codeforces</option>
