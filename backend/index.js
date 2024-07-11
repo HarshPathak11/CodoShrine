@@ -3,6 +3,8 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import connectDB from './db/db.js'
 import { addProfile, getPlatformUserData, userLogin, userLogUp } from './controllers/user.controllers.js'
+import checkContests from './controllers/contest.controllers.js'
+import scheduleJobs from './job/scheduler.js'
 
 dotenv.config()
 
@@ -17,8 +19,12 @@ app.get("/signin",userLogin)
 app.get("/signup",userLogUp)
 app.get("/addprofile",addProfile)
 app.get("/data",getPlatformUserData)
+// to get contests list of different platforms
+app.get("/getContestsList", checkContests)
 
 
 app.listen(8000,()=>{
     console.log('server running on http://localhost:8000')
+    //scheduling the job for fetching 
+    scheduleJobs();
 })
