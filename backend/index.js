@@ -23,7 +23,7 @@ app.post("/data",getPlatformUserData)
 // to get contests list of different platforms
 app.get("/getContestsList", checkContests)
 // to get recent contests list
-app.get("/getRecentContests", getRecentContests) // has to provide {"username":"Rusty"} in request body
+app.post("/getRecentContests", getRecentContests) // has to provide {"username":"Rusty"} in request body
 
 
 app.listen(8000,()=>{

@@ -46,11 +46,11 @@ const userLogin = async (req, res) => {
 
   if (!user)
     res.status(400).json({ "message": "Error could not find emailID" })
-
+  if(user){
   const isPasswordOk = await user.isPasswordCorrect(password)
   if (!isPasswordOk)
     res.status(400).json({ "message": "Password Incorrect!" })
-  res.status(200).json(user)
+  res.status(200).json(user)}
 
 }
 

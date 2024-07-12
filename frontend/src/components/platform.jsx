@@ -13,8 +13,9 @@ import {
 
 ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, PointElement, LineElement);
 
-const CodingPlatformData = ({username,platform,userdata}) => {
+const CodingPlatformData = ({username,platform,userdata,contestData}) => {
   const platData=userdata[platform]
+  const contData=contestData[platform]
   const pieData = {
     labels: ['Easy', 'Medium', 'Hard'],
     datasets: [
@@ -27,14 +28,15 @@ const CodingPlatformData = ({username,platform,userdata}) => {
   };
 
   const lineData = {
-    labels: ['1', '2', '3', '4', '5'],
+    labels: contData.contestNames,
     datasets: [
       {
         label: 'Previous Ratings',
-        data: [900, 1600, 1700, 1650, 1750],
-        fill: false,
-        backgroundColor: '#36A2EB',
+        data: contData.contestRanks,
+        fill: true,
+        backgroundColor: 'rgba(144, 162, 235, 0.2)',
         borderColor: '#36A2EB',
+        pointBackgroundColor: '#36A2EB'
       },
     ],
   };
@@ -62,10 +64,10 @@ const CodingPlatformData = ({username,platform,userdata}) => {
             <p className="text-gray-400">{username}</p>
           </div>
         </div>
-        <div>
+        {/*<div>
           <h3 className="text-xl font-semibold mb-4">Problem Distribution</h3>
           <div className=' h-52 flex justify-center'><Pie data={pieData} /></div>
-        </div>
+        </div>*/}
         </div>
         <div>
           <h3 className="text-xl font-semibold mb-4">Previous Ratings</h3>

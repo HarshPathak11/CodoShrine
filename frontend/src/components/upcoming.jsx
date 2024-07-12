@@ -53,7 +53,7 @@ const UpcomingContestPage = () => {
         };
         const b=transformContestData(data)
         console.log(b);
-        setContestList(data)      
+        setContestList(b)      
       }
     }
     getContests()

@@ -60,6 +60,9 @@ const Table = ({ contests, searchTerm, selectedPlatform }) => {
             (selectedPlatform ? contest.platform === selectedPlatform : true)
         );
     });
+    // const filteredContests=contests
+    // console.log(contests,"hh")
+    // console.log('Is filteredContests an array?', Array.isArray(filteredContests));
 
     return (
         <div className="bg-white shadow overflow-hidden sm:rounded-lg">
@@ -82,7 +85,7 @@ const Table = ({ contests, searchTerm, selectedPlatform }) => {
                         </tr>
                     </thead>
                     <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                        {filteredContests.map((contest, index) => (
+                        {filteredContests.map((contest,index) => (
                             <tr key={index} className="hover:bg-gray-100 dark:hover:bg-gray-600 even:bg-gray-50 dark:even:bg-gray-700 odd:bg-white dark:odd:bg-gray-800">
                                 <td className="px-6 py-4 whitespace-nowrap">
                                     <div className="text-sm font-medium text-gray-900 dark:text-gray-200">{contest.platform}</div>

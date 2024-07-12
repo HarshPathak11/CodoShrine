@@ -12,6 +12,8 @@ function App() {
   const [userData,setUserData]=useState({});
   const [totalq,setTotalq]=useState(0);
   const [totalcontest,setTotalContest]=useState(0);
+  const [list,setList]=useState([])
+  const [contestData,setContestData]=useState({})
 
   const location=useLocation()
   const {username,email,platformProfiles}=location.state
@@ -21,6 +23,8 @@ function App() {
     console.log(arrayOfObjects)
     setProfiles(arrayOfObjects)
   }
+
+  
 
   // console.log(username,platformProfiles)
 
@@ -52,10 +56,21 @@ function App() {
 
         if(resp.ok){
           const data=await resp.json()
-          console.log(data)
+          // console.log(data)
           setUserData(data)
-          const a=[profile.platform,{platid:profile.username}]
-          setProfiles([...profiles,a]);
+          // const a=[profile.platform,{platid:profile.username}]
+          // setProfiles([...profiles,a]);
+          const existingProfileIndex = profiles.findIndex(p => p[0] === profile.platform);
+
+          // If an existing profile is found, replace it
+          if (existingProfileIndex !== -1) {
+            const updatedProfiles = [...profiles];
+            updatedProfiles[existingProfileIndex] = [profile.platform, { platid: profile.username ,  isId: true }];
+            setProfiles(updatedProfiles);
+          } else {
+            // Otherwise, add the new profile
+            setProfiles([...profiles, [profile.platform, { platid: profile.username , isId: true}]]);
+          }
         }
     }
     else{
@@ -69,6 +84,40 @@ function App() {
 
 
   React.useEffect(()=>{
+    function transformContestData(data) {
+      const transformedData = {
+          leetcode: {
+              contestNames: [],
+              contestRanks: []
+          },
+          codechef: {
+              contestNames: [],
+              contestRanks: []
+          }
+      };
+  
+      // Process LeetCode contests
+      if (data.leetcode && Array.isArray(data.leetcode)) {
+          data.leetcode.forEach(contest => {
+              if (contest.contest && contest.contest.title && contest.ranking !== undefined) {
+                  transformedData.leetcode.contestNames.push(contest.contest.title);
+                  transformedData.leetcode.contestRanks.push(contest.rating);
+              }
+          });
+      }
+  
+      // Process CodeChef contests
+      if (data.codechef && Array.isArray(data.codechef)) {
+          data.codechef.forEach(contest => {
+              if (contest.name && contest.rank !== undefined) {
+                  transformedData.codechef.contestNames.push(contest.name);
+                  transformedData.codechef.contestRanks.push(contest.rating);
+              }
+          });
+      }
+  
+      return transformedData;
+  }
     async function loadData(){
     const resp=await fetch('http://localhost:8000/data',{
       method: 'POST',
@@ -84,11 +133,35 @@ function App() {
       const data=await resp.json()
       console.log(data)
       setUserData(data)
-      // setTotalq(data.leetcode.totalQuestionSolved+data.codechef.totalQuestionSolved)
+      // console.log(data.leetcode.totalQuestionSolved,data.codechef.totalQuestionSolved)
+      setTotalq(data.leetcode.totalQuestionSolved+data.codechef.totalQuestionSolved)
+      setTotalContest(data.leetcode.totalContestsParticipated+data.codechef.totalContestsParticipated)
+      setList([data.leetcode.totalQuestionSolved,data.codechef.totalQuestionSolved])
+      // console.log(totalq)
     }
+    }
+    async function getContestData(){
+      const res=await fetch('http://localhost:8000/getRecentContests',{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json' // Specify the content type as JSON
+        },
+        body: JSON.stringify({
+          username:username // Assuming you have email and password variables defined somewhere
+        })
+      });
+      if(res.ok){
+        const data2=await res.json();
+        console.log(data2)
+        const x=transformContestData(data2)
+        // console.log(x,"x hai ye")
+        setContestData(x);
+      }
     }
     loadData()
-  },[])
+    getContestData()
+    // console.log(contestData,"lol")
+  },[profiles])
   
   return (
     <div className="min-h-screen bg-gray-900 flex flex-col items-center ">
@@ -137,7 +210,7 @@ function App() {
             <div className="bg-[#b08968] text-center rounded-lg p-4 border-4 text-xl font-bold mb-4">NO IDEA YHA KYA RKHNA H</div>
           </div> */}
           <div className="bg-gray-900 rounded-lg p-2 md:w-[40vw] text-center text-white flex justify-center">
-          <CodingStatsCard/>
+          <CodingStatsCard tq={totalq} tc={totalcontest} list={list} />
           </div>
         </div>
         </div>
@@ -151,9 +224,9 @@ function App() {
       {isModalOpen && <Modal addProfile={addProfile} cancelModal={cancelModal} />}
    
 
-        <div className="grid grid-flow-row gap-4">
-            {profiles.map((obj)=>{return <div className="bg-gray-900 flex justify-center"><CodingPlatformData username={obj[1].platid} platform={obj[0]} userdata={userData}/></div>})}
-          </div>
+        {Object.keys(contestData).length !== 0 && <div className="grid grid-flow-row gap-4">
+            {profiles.map((obj)=>{return <div className="bg-gray-900 flex justify-center"><CodingPlatformData username={obj[1].platid} platform={obj[0]} userdata={userData} contestData={contestData}/></div>})}
+          </div>}
         
       </div>
     </div>
