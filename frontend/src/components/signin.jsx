@@ -10,7 +10,7 @@ const SignInForm = () => {
   async function formonSubmit(event){
      console.log(event)
       event.preventDefault();
-      const response= await fetch('http://localhost:8000/login',{
+      const response= await fetch('http://localhost:8000/signin',{
         method: 'POST',
         headers: {
           'Content-Type': 'application/json' // Specify the content type as JSON
@@ -24,7 +24,7 @@ const SignInForm = () => {
       if(response.ok){
         const dataset=await response.json();
         console.log(dataset)
-        return navigate('/dash',{state:{name:dataset.name,count:dataset.count,blogs:dataset.blogs}})
+        return navigate('/dash',{state:{username:dataset.username,email:dataset.email,platformProfiles:dataset.platformProfiles}})
       }
       else{
         alert("Email or Password dont match! Try Again.")

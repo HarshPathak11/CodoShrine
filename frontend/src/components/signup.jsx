@@ -12,7 +12,7 @@ const SignUpForm = () => {
     event.preventDefault();
     console.log("ho");
 
-    const response=await fetch("https://blogify-wq3o.onrender.com/api/register",{
+    const response=await fetch("http://localhost:8000/signup",{
       method:'POST',
       headers:{
         'Content-Type':'application/json'
@@ -24,11 +24,12 @@ const SignUpForm = () => {
         confirmPassword:confirmPassword
       })
     })
+    // console.log(response)
 
     if(response.ok){
       const dataset=await response.json();
       console.log(dataset)
-      return navigate('/dash',{state:{name:dataset.name,count:dataset.count,blogs:dataset.blogs}})
+      return navigate('/dash',{state:{username:dataset.username,email:dataset.email,platformProfiles:dataset.platformProfiles}})
     }
     else{
       alert("Username or Email already taken!")

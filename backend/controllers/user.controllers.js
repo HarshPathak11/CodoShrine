@@ -140,7 +140,7 @@ const getPlatformUserData = async (req, res) => {
     codechef: {
       totalQuestionSolved: 0,
       totalContestsParticipated: 0,
-      highestRating: 0
+      contestRating: 0
     }
   };
 
@@ -148,9 +148,14 @@ const getPlatformUserData = async (req, res) => {
   if(!user)
     res.status(500).json({"message":"Something went wrong"})
 
+  console.log(user)
+
   // Accessing the username of this user for different platforms
   let leetData = user.platformProfiles.leetcode;
   let chefData = user.platformProfiles.codechef;
+
+  console.log(leetData)
+  console.log(chefData)
 
   if(leetData===undefined)
     leetData={isId:false}
@@ -220,7 +225,7 @@ const getPlatformUserData = async (req, res) => {
 
           userResponseData.codechef.totalQuestionSolved = parseInt(totalProblemsSolved);
           userResponseData.codechef.totalContestsParticipated = parseInt(contestsParticipated);
-          userResponseData.codechef.highestRating = parseInt(highestRating);
+          userResponseData.codechef.contestRating = parseInt(highestRating);
         } catch (error) {
           console.error('Error fetching Chef data:', error);
         }

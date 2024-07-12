@@ -16,10 +16,10 @@ app.use(cors());
 
 connectDB()
 
-app.get("/signin",userLogin)
-app.get("/signup",userLogUp)
-app.get("/addprofile",addProfile)
-app.get("/data",getPlatformUserData)
+app.post("/signin",userLogin)
+app.post("/signup",userLogUp)
+app.post("/addprofile",addProfile)
+app.post("/data",getPlatformUserData)
 // to get contests list of different platforms
 app.get("/getContestsList", checkContests)
 // to get recent contests list

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 const Modal = ({ addProfile, cancelModal }) => {
   const [username, setUsername] = useState('');
-  const [platform, setPlatform] = useState('Leetcode');
+  const [platform, setPlatform] = useState('leetcode');
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -31,8 +31,8 @@ const Modal = ({ addProfile, cancelModal }) => {
               onChange={(e) => setPlatform(e.target.value)}
               className="w-full p-2 bg-gray-700 text-white rounded-lg focus:outline-none"
             >
-              <option value="Leetcode">Leetcode</option>
-              <option value="Codechef">Codechef</option>
+              <option value="leetcode">Leetcode</option>
+              <option value="codechef">Codechef</option>
             </select>
           </div>
           <div className="flex justify-end space-x-4">

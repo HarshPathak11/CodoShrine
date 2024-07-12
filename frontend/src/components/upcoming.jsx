@@ -6,6 +6,58 @@ import { Link } from 'react-router-dom';
 
 
 const UpcomingContestPage = () => {
+  const [contestList,setContestList]=React.useState([])
+
+   React.useEffect(()=>{
+    async function getContests(){
+      const response=await  fetch('http://localhost:5000/',{
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json' // Specify the content type as JSON
+        }
+      });
+      if(response.ok){
+        const data=await response.json()
+        const transformContestData = (data) => {
+          const list = [];
+        
+          // Process CodeChef contests
+          data.codechef.forEach(contest => {
+            const startDate = new Date(contest.contest_start_date_iso);
+            const formattedDate = startDate.toISOString().split('T')[0]; // Extracting date in YYYY-MM-DD format
+            const formattedTime = startDate.toISOString().split('T')[1].split('.')[0]; // Extracting time in HH:MM:SS format
+        
+            list.push({
+              platform: 'CodeChef',
+              contest: contest.contest_name.trim(),
+              date: formattedDate,
+              time: `${formattedTime} UTC`
+            });
+          });
+        
+          // Process LeetCode contests
+          data.leetcode.forEach(contest => {
+            const startDate = new Date(contest.contest_start_date);
+            const formattedDate = startDate.toISOString().split('T')[0]; // Extracting date in YYYY-MM-DD format
+            const formattedTime = startDate.toISOString().split('T')[1].split('.')[0]; // Extracting time in HH:MM:SS format
+        
+            list.push({
+              platform: 'LeetCode',
+              contest: contest.contest_name.trim(),
+              date: formattedDate,
+              time: `${formattedTime} UTC`
+            });
+          });
+        
+          return list;
+        };
+        const b=transformContestData(data)
+        console.log(b);
+        setContestList(data)      
+      }
+    }
+    getContests()
+   },[])
     const contests = [
         { platform: 'Codeforces', contest: 'Codeforces Round #690', date: '2024-07-12', time: '17:00 UTC' },
         { platform: 'LeetCode', contest: 'Weekly Contest 250', date: '2024-07-13', time: '14:30 UTC' },
@@ -107,7 +159,7 @@ const UpcomingContestPage = () => {
                     </select>
 
                 </div>
-                <Table contests={contests} searchTerm={searchTerm} selectedPlatform={selectedPlatform} />
+                {contestList.length!==0 && <Table contests={contestList} searchTerm={searchTerm} selectedPlatform={selectedPlatform} />}
             </div>
         </div>
     );
