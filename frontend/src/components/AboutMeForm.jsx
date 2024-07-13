@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
-function AboutMeForm({ handleAboutForm }) {
+function AboutMeForm({ handleAboutForm, username }) {
   const [aboutMe, setAboutMe] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -14,12 +15,25 @@ function AboutMeForm({ handleAboutForm }) {
     }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Handle submission of aboutMe
-    alert(`Submitted About Me: ${aboutMe}`);
-    // You can also handle the form submission here, such as sending the data to a backend server
-    handleAboutForm();
+    try {
+      // Handle submission of aboutMe
+      const response = await axios.post('http://localhost:8000/addAbout', {
+        username: username,
+        about: aboutMe
+      });
+
+      if (response.status === 200) {
+        alert(`Successfully submitted About Me`);
+      } else {
+        alert(`Submission failed with status`);
+      }
+      handleAboutForm();
+    } catch (error) {
+      console.error('Error submitting About Me:', error);
+      alert('An error occurred while submitting your About Me. Please try again later.');
+    }
   };
 
   return (
@@ -39,9 +53,8 @@ function AboutMeForm({ handleAboutForm }) {
             </label>
             <textarea
               id="aboutMe"
-              className={`w-full h-32 text-black px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                errorMessage ? 'border-red-500' : ''
-              }`}
+              className={`w-full h-32 text-black px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${errorMessage ? 'border-red-500' : ''
+                }`}
               placeholder="Tell us about yourself..."
               value={aboutMe}
               onChange={handleChange}

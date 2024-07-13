@@ -28,7 +28,7 @@ const userLogUp = async (req, res) => {
     "--password --refreshToken"
   )
   if (!createdUser)
-    res.status(500).json({"message":"Could not create user"})
+    res.status(500).json({ "message": "Could not create user" })
   console.log(createdUser)
   return res.status(201).json(createdUser)
 }
@@ -41,16 +41,17 @@ const userLogin = async (req, res) => {
     res.status(400).json({ "message": "Password is required" })
 
   const user = await User.findOne({
-    email:email
+    email: email
   })
 
   if (!user)
     res.status(400).json({ "message": "Error could not find emailID" })
-  if(user){
-  const isPasswordOk = await user.isPasswordCorrect(password)
-  if (!isPasswordOk)
-    res.status(400).json({ "message": "Password Incorrect!" })
-  res.status(200).json(user)}
+  if (user) {
+    const isPasswordOk = await user.isPasswordCorrect(password)
+    if (!isPasswordOk)
+      res.status(400).json({ "message": "Password Incorrect!" })
+    res.status(200).json(user)
+  }
 
 }
 
@@ -130,7 +131,7 @@ const userLogin = async (req, res) => {
 // };
 
 const getPlatformUserData = async (req, res) => {
-  const {username}=req.body
+  const { username } = req.body
   const userResponseData = {
     leetcode: {
       totalQuestionSolved: 0,
@@ -144,9 +145,9 @@ const getPlatformUserData = async (req, res) => {
     }
   };
 
-  const user=await User.findOne({username:username})
-  if(!user)
-    res.status(500).json({"message":"Something went wrong"})
+  const user = await User.findOne({ username: username })
+  if (!user)
+    res.status(500).json({ "message": "Something went wrong" })
 
   console.log(user)
 
@@ -157,15 +158,15 @@ const getPlatformUserData = async (req, res) => {
   console.log(leetData)
   console.log(chefData)
 
-  if(leetData===undefined)
-    leetData={isId:false}
-  if(chefData===undefined)
-    chefData={isId:false}
+  if (leetData === undefined)
+    leetData = { isId: false }
+  if (chefData === undefined)
+    chefData = { isId: false }
 
   try {
     if (leetData.isId) {
       const username = leetData.platid;
-      
+
       const solvedResponse = await fetch(`https://alfa-leetcode-api.onrender.com/${username}/solved`, {
         method: 'GET',
         headers: {
@@ -194,7 +195,7 @@ const getPlatformUserData = async (req, res) => {
           if (contestData.contestParticipation.length) {
             userResponseData.leetcode.contestRating = contestData.contestRating;
             userResponseData.leetcode.totalContestsParticipated = contestData.contestAttend;
-          }else{
+          } else {
             userResponseData.leetcode.contestRating = 0;
             userResponseData.leetcode.totalContestsParticipated = 0;
           }
@@ -242,27 +243,27 @@ const getPlatformUserData = async (req, res) => {
 };
 
 
-const addProfile=async(req,res)=>{
-  const{ username, platform,platid}=req.body
-  if(!username || !platform || !platid)
-  res.status(400).json({"message":"Did not receive all credentials"})
+const addProfile = async (req, res) => {
+  const { username, platform, platid } = req.body
+  if (!username || !platform || !platid)
+    res.status(400).json({ "message": "Did not receive all credentials" })
 
   const user = await User.findOneAndUpdate(
-    { username:username },
+    { username: username },
     {
       $set: {
         [`platformProfiles.${platform}`]: {
           platid,
-          isId:true
+          isId: true
         }
       }
     },
     { new: true } // Return the updated user
   );
   console.log(user)
-  if(!user)
-  res.status(500).json({"message":"something went wrong"})
-  res.status(200).json({"message":"profile added successfully"})
+  if (!user)
+    res.status(500).json({ "message": "something went wrong" })
+  res.status(200).json({ "message": "profile added successfully" })
 }
 
 
@@ -305,7 +306,7 @@ const addLinks = async (req, res) => {
 };
 
 const addAbout = async (req, res) => {
-  const { username, about} = req.body;
+  const { username, about } = req.body;
 
   try {
     // Check if username is provided
@@ -322,7 +323,7 @@ const addAbout = async (req, res) => {
 
     // Update user with social media links if provided
     if (about) {
-      user.about=about;
+      user.about = about;
     }
 
     // Save the updated user
@@ -336,8 +337,56 @@ const addAbout = async (req, res) => {
   }
 };
 
+const getAbout = async (req, res) => {
+  const { username } = req.body;
 
-export { userLogUp, userLogin, getPlatformUserData,addProfile,addLinks ,addAbout }
+  try {
+    // Check if username is provided
+    if (!username) {
+      return res.status(400).json({ message: "Username is required" });
+    }
+
+    // Find the user by username
+    const user = await User.findOne({ username: username });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Respond with user's about
+    res.status(200).json({ about: user.about });
+  } catch (error) {
+    console.error("Error fetching about:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+}
+
+const getLinks = async (req, res) => {
+  const { username } = req.body;
+
+  try {
+    // Check if username is provided
+    if (!username) {
+      return res.status(400).json({ message: "Username is required" });
+    }
+
+    // Find the user by username
+    const user = await User.findOne({ username: username });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Respond with user's social media links
+    res.status(200).json({ insta: user.insta, github: user.github, linkedIn: user.linkedIn });
+  } catch (error) {
+    console.error("Error fetching links:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+}
+
+
+export { userLogUp, userLogin, getPlatformUserData, addProfile, addLinks, addAbout, getAbout, getLinks }
 
 
 

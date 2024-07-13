@@ -7,6 +7,7 @@ import Modal from './components/popup';
 import CodingStatsCard from './components/Card';
 import SocialMediaForm from './components/SocialMediaForm';
 import AboutMeForm from './components/AboutMeForm';
+import axios from 'axios';
 
 function App() {
   const [profiles, setProfiles] = useState([]);
@@ -20,7 +21,10 @@ function App() {
   const [aboutForm, setAboutForm] = useState(false);
   const [loading, setLoading] = useState(false); // state to track loading
   const [navbarSolid, setNavbarSolid] = useState(false); // state to track navbar background
-
+  const [aboutme, setAboutMe] = useState("-");
+  const [linkedinLink, setLinkedinLink] = useState("");
+  const [githubLink, setGithubLink] = useState("");
+  const [instaLink, setInstaLink] = useState("");
   const location = useLocation();
   const { username, email, platformProfiles } = location.state;
 
@@ -160,12 +164,88 @@ function App() {
     getContestData();
   }, [username]);
 
-  const handleMediaForm = () => {
+  const handleMediaForm = async () => {
     setMediaForm(!mediaForm);
+    try {
+      const response = await axios.post('http://localhost:8000/getLinks', {
+        username
+      })
+
+      if (response.status === 200) {
+        setLinkedinLink(response.data.linkedIn);
+        setGithubLink(response.data.github);
+        setInstaLink(response.data.insta);
+      }
+    } catch (error) {
+      console.error('Error fetching links:', error);
+      alert('An error occurred while fetching your links. Please try again later.');
+    }
   };
 
-  const handleAboutForm = () => {
+  const handleAboutForm = async () => {
     setAboutForm(!aboutForm);
+    try {
+      // Handle submission of aboutMe
+      const response = await axios.post('http://localhost:8000/getAbout', {
+        username
+      });
+
+      if (response.status === 200) {
+        setAboutMe(response.data.about);
+      }
+
+    } catch (error) {
+      console.error('Error submitting About Me:', error);
+      alert('An error occurred while submitting your About Me. Please try again later.');
+
+    }
+  }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const linksResponse = await axios.post('http://localhost:8000/getLinks', {
+          username
+        });
+
+        if (linksResponse.status === 200) {
+          console.log(linksResponse.data);
+          setLinkedinLink(linksResponse.data.linkedIn);
+          setGithubLink(linksResponse.data.github);
+          setInstaLink(linksResponse.data.insta);
+        }
+      } catch (error) {
+        console.error('Error fetching links:', error);
+        alert('An error occurred while fetching your links. Please try again later.');
+      }
+
+      try {
+        const aboutResponse = await axios.post('http://localhost:8000/getAbout', {
+          username
+        });
+
+        if (aboutResponse.status === 200) {
+          setAboutMe(aboutResponse.data.about);
+        }
+      } catch (error) {
+        console.error('Error fetching About Me:', error);
+        alert('An error occurred while fetching your About Me. Please try again later.');
+      }
+    };
+
+    fetchData();
+  }, [username])
+
+  const handleLinked = () => {
+    window.open(linkedinLink, '_blank');
+  }
+
+  const handleGit = () => {
+    window.open(githubLink, '_blank');
+  }
+
+  const handleInsta = () => {
+    window.open(instaLink, '_blank');
   }
 
   return (
@@ -234,15 +314,15 @@ function App() {
                   </button>
                 </div>
                 <div className="flex justify-around">
-                  <a href="https://www.linkedin.com" className="text-blue-500 hover:text-blue-700">
+                  <div onClick={handleLinked} className="text-blue-500 hover:text-blue-700">
                     <FaLinkedin size={30} />
-                  </a>
-                  <a href="https://www.github.com" className="text-gray-500 hover:text-gray-700">
+                  </div>
+                  <div onClick={handleGit} className="text-gray-100 hover:text-gray-700">
                     <FaGithub size={30} />
-                  </a>
-                  <a href="https://www.instagram.com" className="text-pink-500 hover:text-pink-700">
+                  </div>
+                  <div onClick={handleInsta} className="text-pink-500 hover:text-pink-700">
                     <FaInstagram size={30} />
-                  </a>
+                  </div>
                 </div>
               </div>
               <div>
@@ -256,8 +336,7 @@ function App() {
                   </button>
                 </div>
                 <p className="text-gray-400">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque, urna eget tincidunt aliquam,
-                  nisi erat volutpat nunc, et bibendum odio sapien nec massa. Integer vitae fermentum est, eget pulvinar libero.
+                  {aboutme}
                 </p>
               </div>
             </div>
@@ -281,8 +360,8 @@ function App() {
           {loading ? 'Adding...' : 'Add Profile'}
         </button>
         {isModalOpen && <Modal addProfile={addProfile} cancelModal={cancelModal} />}
-        {mediaForm && <SocialMediaForm handleMediaForm={handleMediaForm} />}
-        {aboutForm && <AboutMeForm handleAboutForm={handleAboutForm} />}
+        {mediaForm && <SocialMediaForm handleMediaForm={handleMediaForm} username={username} />}
+        {aboutForm && <AboutMeForm handleAboutForm={handleAboutForm} username={username} />}
 
         {Object.keys(contestData).length !== 0 && (
           <div className="grid grid-flow-row gap-4">

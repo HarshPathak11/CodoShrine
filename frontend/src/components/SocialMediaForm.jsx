@@ -1,16 +1,32 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
-function SocialMediaForm({ handleMediaForm }) {
+function SocialMediaForm({ handleMediaForm, username }) {
   const [instagram, setInstagram] = useState('');
   const [github, setGithub] = useState('');
   const [linkedin, setLinkedin] = useState('');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    //make a api to submit the form
-    alert(` submitted Instagram: ${instagram}\nGitHub: ${github}\nLinkedIn: ${linkedin}`);
-    // You can also handle the form submission here, such as sending the data to a backend server
-    handleMediaForm();
+    try {
+      // Handle submission of aboutMe
+      const response = await axios.post('http://localhost:8000/addAbout', {
+        username,
+        insta: instagram,
+        github: github,
+        linkedIn: linkedin
+      });
+
+      if (response.status === 200) {
+        alert(`Successfully submitted Media Links`);
+      } else {
+        alert(`Submission failed`);
+      }
+      handleMediaForm();
+    } catch (error) {
+      console.error('Error submitting Links', error);
+      alert('An error occurred while submitting your Links. Please try again later.');
+    }
   };
 
   return (
