@@ -10,7 +10,7 @@ const UpcomingContestPage = () => {
 
    React.useEffect(()=>{
     async function getContests(){
-      const response=await  fetch('http://localhost:5000/',{
+      const response=await  fetch('http://localhost:8000/getContestsList',{
         method: 'GET',
         headers: {
           'Content-Type': 'application/json' // Specify the content type as JSON
