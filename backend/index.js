@@ -2,7 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
 import connectDB from './db/db.js'
-import { addProfile, getPlatformUserData, userLogin, userLogUp } from './controllers/user.controllers.js'
+import { addAbout, addLinks, addProfile, getPlatformUserData, userLogin, userLogUp } from './controllers/user.controllers.js'
 import checkContests from './controllers/contest.controllers.js'
 import scheduleJobs from './job/scheduler.js'
 import getRecentContests from './controllers/recentContest.controllers.js'
@@ -24,8 +24,8 @@ app.post("/data",getPlatformUserData)
 app.get("/getContestsList", checkContests)
 // to get recent contests list
 app.post("/getRecentContests", getRecentContests) // has to provide {"username":"Rusty"} in request body
-
-
+app.post("/addAbout",addAbout)
+app.post("/addlinks",addLinks)
 app.listen(8000,()=>{
     console.log('server running on http://localhost:8000')
     //scheduling the job for fetching 

@@ -27,9 +27,25 @@ const CodingPlatformData = ({ username, platform, userdata, contestData }) => {
       },
     ],
   };
+  const [newLabels,setNew]=React.useState(['1', '2', '3', '4', '5'])
+  React.useEffect(()=>{
+      const updateLabels = () => {
+        const width = window.innerWidth;
+        
+  
+        if (width < 768) { // Mobile
+          setNew(['1', '2', '3', '4', '5']);
+        } else { // Tablet and Laptop
+          setNew(contData.contestNames);
+        }
+      }
+      updateLabels()
+      console.log(newLabels)
+  },[])
 
   const lineData = {
-    labels: contData.contestNames,
+    // labels: contData.contestNames,
+    labels: newLabels,
     datasets: [
       {
         label: 'Previous Ratings',
@@ -49,7 +65,7 @@ const CodingPlatformData = ({ username, platform, userdata, contestData }) => {
     // <div className="flex justify-center items-center min-h-screen bg-gray-900 p-4">
     <div className="m-2 w-full bg-gray-800 text-white rounded-lg shadow-lg p-6 space-y-6">
       <h1 className="text-3xl font-bold text-blue-500">{platform[0].toUpperCase() + platform.slice(1)} Profile</h1>
-      <div className='flex items-center'>
+      {/* <div className='flex items-center'>
         <div className='grid grid-flow-row md:grid-cols-2 w-[55%]'>
           <div className="grid grid-cols-2 gap-2 mb-2 w-full">
             <div>
@@ -69,16 +85,44 @@ const CodingPlatformData = ({ username, platform, userdata, contestData }) => {
               <p className="text-gray-400">{username}</p>
             </div>
           </div>
-          {/*<div>
-          <h3 className="text-xl font-semibold mb-4">Problem Distribution</h3>
-          <div className=' h-52 flex justify-center'><Pie data={pieData} /></div>
-        </div>*/}
         </div>
         <div>
           <h3 className="text-xl font-semibold mb-4">Previous Ratings</h3>
           <div className=' md:h-64 flex justify-center'><Line data={lineData} /></div>
         </div>
+      </div> */}
+      <div className='flex flex-col md:flex-row items-center'>
+  <div className='grid grid-flow-row md:grid-cols-2 w-full md:w-[55%]'>
+    <div className="grid grid-flow-row md:grid-cols-2 gap-2 mb-2 w-full">
+      <div>
+        <h3 className="text-xl font-semibold">Total Questions Solved</h3>
+        <p className="text-gray-400">{platData && platData.totalQuestionSolved}</p>
       </div>
+      <div>
+        <h3 className="text-xl font-semibold">Max Rating</h3>
+        <p className="text-gray-400">{platData && platData.contestRating.toFixed(2)}</p>
+      </div>
+      <div>
+        <h3 className="text-xl font-semibold">No. of Contests Given</h3>
+        <p className="text-gray-400">{platData && platData.totalContestsParticipated}</p>
+      </div>
+      <div>
+        <h3 className="text-xl font-semibold">Username</h3>
+        <p className="text-gray-400">{username}</p>
+      </div>
+    </div>
+    {/* Uncomment if needed
+    <div>
+      <h3 className="text-xl font-semibold mb-4">Problem Distribution</h3>
+      <div className=' h-52 flex justify-center'><Pie data={pieData} /></div>
+    </div> */}
+  </div>
+  <div className='w-full md:w-auto'>
+    <h3 className="text-xl font-semibold mb-4">Previous Ratings</h3>
+    <div className='w-[70vw] h-[70vw] md:w-[40vw] md:h-64 md:flex md:justify-center'><Line data={lineData} /></div>
+  </div>
+</div>
+
 
     </div>
 

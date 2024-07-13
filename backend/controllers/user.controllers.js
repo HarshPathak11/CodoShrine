@@ -265,7 +265,79 @@ const addProfile=async(req,res)=>{
   res.status(200).json({"message":"profile added successfully"})
 }
 
-export { userLogUp, userLogin, getPlatformUserData,addProfile }
+
+const addLinks = async (req, res) => {
+  const { username, insta, github, linkedIn } = req.body;
+
+  try {
+    // Check if username is provided
+    if (!username) {
+      return res.status(400).json({ message: "Username is required" });
+    }
+
+    // Find the user by username
+    const user = await User.findOne({ username: username });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Update user with social media links if provided
+    if (insta) {
+      user.insta = insta;
+    }
+    if (github) {
+      user.github = github;
+    }
+    if (linkedIn) {
+      user.linkedIn = linkedIn;
+    }
+
+    // Save the updated user
+    await user.save();
+
+    // Respond with success message
+    res.status(200).json({ user: user });
+  } catch (error) {
+    console.error("Error adding links:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+const addAbout = async (req, res) => {
+  const { username, about} = req.body;
+
+  try {
+    // Check if username is provided
+    if (!username) {
+      return res.status(400).json({ message: "Username is required" });
+    }
+
+    // Find the user by username
+    const user = await User.findOne({ username: username });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Update user with social media links if provided
+    if (about) {
+      user.about=about;
+    }
+
+    // Save the updated user
+    await user.save();
+
+    // Respond with success message
+    res.status(200).json({ user: user });
+  } catch (error) {
+    console.error("Error adding links:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+
+export { userLogUp, userLogin, getPlatformUserData,addProfile,addLinks ,addAbout }
 
 
 

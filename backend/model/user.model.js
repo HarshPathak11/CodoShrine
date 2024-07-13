@@ -16,6 +16,14 @@ const userSchema= new mongoose.Schema({
         type:String,
         required:true
     },
+    linkedIn:{
+        type:String},
+    insta:{
+        type:String},
+    github:{
+        type:String},
+    about:{
+        type:String},
     platformProfiles: {
     type: Object,
     default: {} // Initialize with an empty object
