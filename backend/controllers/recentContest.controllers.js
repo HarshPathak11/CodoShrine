@@ -14,7 +14,7 @@ const getRecentContests = async (req, res) => {
             codechef: []
         };
         // get recent contests from chef
-        if (user[0].platformProfiles.codechef.isId) {
+        if (user[0].platformProfiles.codechef && user[0].platformProfiles.codechef.isId) {
             const platUserID = user[0].platformProfiles.codechef.platid;
             console.log(platUserID);
             const response = await axios.get(`https://codechef-api.vercel.app/${platUserID}`);
@@ -28,7 +28,7 @@ const getRecentContests = async (req, res) => {
         }
 
         // get recent contests from leetcode
-        if (user[0].platformProfiles.leetcode.isId) {
+        if (user[0].platformProfiles.leetcode && user[0].platformProfiles.leetcode.isId) {
             const platUserID = user[0].platformProfiles.leetcode.platid;
             const response = await axios.get(`https://alfa-leetcode-api.onrender.com/${platUserID}/contest`);
             const responseArr = response.data.contestParticipation;

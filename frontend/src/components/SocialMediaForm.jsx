@@ -10,7 +10,7 @@ function SocialMediaForm({ handleMediaForm, username }) {
     event.preventDefault();
     try {
       // Handle submission of aboutMe
-      const response = await axios.post('http://localhost:8000/addAbout', {
+      const response = await axios.post('http://localhost:8000/addlinks', {
         username,
         insta: instagram,
         github: github,
