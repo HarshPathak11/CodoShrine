@@ -27,21 +27,21 @@ const CodingPlatformData = ({ username, platform, userdata, contestData }) => {
       },
     ],
   };
-  const [newLabels,setNew]=React.useState(['1', '2', '3', '4', '5'])
-  React.useEffect(()=>{
-      const updateLabels = () => {
-        const width = window.innerWidth;
-        
-  
-        if (width < 768) { // Mobile
-          setNew(['1', '2', '3', '4', '5']);
-        } else { // Tablet and Laptop
-          setNew(contData.contestNames);
-        }
+  const [newLabels, setNew] = React.useState(['1', '2', '3', '4', '5'])
+  React.useEffect(() => {
+    const updateLabels = () => {
+      const width = window.innerWidth;
+
+
+      if (width < 768) { // Mobile
+        setNew(['1', '2', '3', '4', '5']);
+      } else { // Tablet and Laptop
+        setNew(contData.contestNames);
       }
-      updateLabels()
-      console.log(newLabels)
-  },[])
+    }
+    updateLabels()
+    console.log(newLabels)
+  }, [])
 
   const lineData = {
     // labels: contData.contestNames,
@@ -59,6 +59,21 @@ const CodingPlatformData = ({ username, platform, userdata, contestData }) => {
         pointBackgroundColor: '#fff',
       },
     ],
+  };
+
+  const chartOptions = {
+    scales: {
+      x: {
+        grid: {
+          color: 'rgba(200, 200, 200, 0.2)', // Color of the vertical grid lines
+        },
+      },
+      y: {
+        grid: {
+          color: 'rgba(200, 200, 200, 0.2)', // Color of the horizontal grid lines
+        },
+      },
+    },
   };
 
   return (
@@ -92,36 +107,36 @@ const CodingPlatformData = ({ username, platform, userdata, contestData }) => {
         </div>
       </div> */}
       <div className='flex flex-col md:flex-row items-center'>
-  <div className='grid grid-flow-row md:grid-cols-2 w-full md:w-[55%]'>
-    <div className="grid grid-flow-row md:grid-cols-2 gap-2 mb-2 w-full">
-      <div>
-        <h3 className="text-xl font-semibold">Total Questions Solved</h3>
-        <p className="text-gray-400">{platData && platData.totalQuestionSolved}</p>
-      </div>
-      <div>
-        <h3 className="text-xl font-semibold">Max Rating</h3>
-        <p className="text-gray-400">{platData && platData.contestRating.toFixed(2)}</p>
-      </div>
-      <div>
-        <h3 className="text-xl font-semibold">No. of Contests Given</h3>
-        <p className="text-gray-400">{platData && platData.totalContestsParticipated}</p>
-      </div>
-      <div>
-        <h3 className="text-xl font-semibold">Username</h3>
-        <p className="text-gray-400">{username}</p>
-      </div>
-    </div>
-    {/* Uncomment if needed
+        <div className='grid grid-flow-row md:grid-cols-2 w-full md:w-[55%]'>
+          <div className="grid grid-flow-row md:grid-cols-2 gap-2 mb-2 w-full">
+            <div>
+              <h3 className="text-xl font-semibold">Total Questions Solved</h3>
+              <p className="text-gray-400">{platData && platData.totalQuestionSolved}</p>
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold">Max Rating</h3>
+              <p className="text-gray-400">{platData && platData.contestRating.toFixed(2)}</p>
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold">No. of Contests Given</h3>
+              <p className="text-gray-400">{platData && platData.totalContestsParticipated}</p>
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold">Username</h3>
+              <p className="text-gray-400">{username}</p>
+            </div>
+          </div>
+          {/* Uncomment if needed
     <div>
       <h3 className="text-xl font-semibold mb-4">Problem Distribution</h3>
       <div className=' h-52 flex justify-center'><Pie data={pieData} /></div>
     </div> */}
-  </div>
-  <div className='w-full md:w-auto'>
-    <h3 className="text-xl font-semibold mb-4">Previous Ratings</h3>
-    <div className='w-[70vw] h-[70vw] md:w-[40vw] md:h-64 md:flex md:justify-center'><Line data={lineData} /></div>
-  </div>
-</div>
+        </div>
+        <div className='w-full md:w-auto'>
+          <h3 className="text-xl font-semibold mb-4">Previous Ratings</h3>
+          <div className='h-[70vw] mt-6 md:mt-0 md:w-[40vw] md:h-64 md:flex md:justify-center'><Line data={lineData} options={chartOptions} /></div>
+        </div>
+      </div>
 
 
     </div>
