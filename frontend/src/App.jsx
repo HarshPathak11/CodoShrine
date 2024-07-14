@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import React from 'react';
-import { FaLinkedin, FaGithub, FaInstagram, FaEnvelope, FaPlus, FaSpinner } from 'react-icons/fa';
+import { FaLinkedin, FaGithub, FaInstagram, FaEnvelope, FaPlus, FaSpinner, FaShareAlt } from 'react-icons/fa';
 import { Link, useLocation } from 'react-router-dom';
 import CodingPlatformData from './components/platform';
 import Modal from './components/popup';
@@ -248,6 +248,18 @@ function App() {
     window.open(instaLink, '_blank');
   }
 
+  const getProfileLink = () => {
+    const profileUrl = `${window.location.origin}/profile/${username}`;
+    navigator.clipboard.writeText(profileUrl)
+      .then(() => {
+        console.log('Profile URL copied to clipboard');
+      })
+      .catch((error) => {
+        console.error('Error copying profile URL to clipboard:', error);
+      });
+
+  }
+
   return (
     <div className="min-h-screen bg-gray-900 flex flex-col items-center">
       <nav
@@ -297,11 +309,17 @@ function App() {
         <div className="bg-gray-900 grid grid-cols-1 md:grid-cols-2">
           <div className="flex justify-center items-center bg-gray-900 p-2 md:p-4">
             <div className="md:max-w-sm w-full bg-gray-800 text-white rounded-lg shadow-lg p-6 space-y-6">
-              <div className="text-center">
-                <h2 className="text-2xl font-bold">Username: {username}</h2>
-                <p className="text-gray-400">
-                  <FaEnvelope className="inline mr-2" /> {email}
-                </p>
+              <div className="flex items-center justify-between gap-4">
+                <div className=''>
+                  <h2 className="text-2xl font-bold">Username: {username}</h2>
+                  <p className="text-gray-400">
+                    <FaEnvelope className="inline mr-2" /> {email}
+                  </p>
+                </div>
+                <button onClick={getProfileLink} className="text-white bg-blue-500 hover:bg-blue-700 px-3 py-1 rounded flex items-center">
+                  <FaShareAlt className="mr-2" />
+                  Share Profile
+                </button>
               </div>
               <div>
                 <div className="flex items-center justify-between mb-3">

@@ -385,8 +385,32 @@ const getLinks = async (req, res) => {
   }
 }
 
+const getUser = async (req, res) => {
+  const { username } = req.body;
 
-export { userLogUp, userLogin, getPlatformUserData, addProfile, addLinks, addAbout, getAbout, getLinks }
+  try {
+    // Check if username is provided
+    if (!username) {
+      return res.status(400).json({ message: "Username is required" });
+    }
+
+    // Find the user by username
+    const user = await User.findOne({ username: username });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Respond with user's social media links
+    res.status(200).json(user);
+  } catch (error) {
+    console.error("Error fetching user:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+}
+
+
+export { userLogUp, userLogin, getPlatformUserData, addProfile, addLinks, addAbout, getAbout, getLinks, getUser}
 
 
 

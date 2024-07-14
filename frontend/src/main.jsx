@@ -7,9 +7,10 @@ import Modal from './components/popup.jsx'
 import HomePage from './components/home.jsx'
 import Table from './components/table.jsx'
 import UpcomingContestPage from './components/upcoming.jsx'
-import { BrowserRouter,Route,Routes,Link } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 import Landing from './components/loginpage.jsx'
 import Register from './components/loguppage.jsx'
+import PublicProfile from './components/PublicProfile.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -19,20 +20,23 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     {/* <HomePage/> */}
     {/* <UpcomingContestPage />     */}
     <BrowserRouter>
-    <Routes>
-      <Route path='/' element={<HomePage/>} />
-    </Routes>
-    <Routes>
-        <Route path="/login" element={<div className='bg-slate-900'>  <Landing/>
-      </div>} /> 
-     
-      <Route path='/register' element={<div className='bg-slate-900'> 
-      <Register/>
-      </div>}/>
-      <Route path='/dash' element={<App/>} />
-      <Route path='/cal' element={<UpcomingContestPage/>} />
-      {/* <Route path='/nav' element={<Navbar/>} /> */}
+      <Routes>
+        <Route path='/' element={<HomePage />} />
       </Routes>
-  </BrowserRouter>
+      <Routes>
+        <Route path='/profile/:username' element={<PublicProfile />} />
+      </Routes>
+      <Routes>
+        <Route path="/login" element={<div className='bg-slate-900'>  <Landing />
+        </div>} />
+
+        <Route path='/register' element={<div className='bg-slate-900'>
+          <Register />
+        </div>} />
+        <Route path='/dash' element={<App />} />
+        <Route path='/cal' element={<UpcomingContestPage />} />
+        {/* <Route path='/nav' element={<Navbar/>} /> */}
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>,
 )
