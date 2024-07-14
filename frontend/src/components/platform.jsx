@@ -41,7 +41,7 @@ const CodingPlatformData = ({ username, platform, userdata, contestData }) => {
     }
     updateLabels()
     console.log(newLabels)
-  }, [])
+  }, [window.innerWidth])
 
   const lineData = {
     // labels: contData.contestNames,

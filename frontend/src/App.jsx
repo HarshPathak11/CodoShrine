@@ -323,13 +323,13 @@ function App() {
                   </button>
                 </div>
                 <div className="flex justify-around items-center">
-                  <div onClick={handleLinked} className="text-blue-500 hover:text-blue-700">
+                  <div onClick={handleLinked} className="text-blue-500 hover:text-blue-700 cursor-pointer">
                     <FaLinkedin size={30} />
                   </div>
-                  <div onClick={handleGit} className="text-gray-100 hover:text-gray-700">
+                  <div onClick={handleGit} className="text-gray-100 hover:text-gray-400 cursor-pointer">
                     <FaGithub size={30} />
                   </div>
-                  <div onClick={handleInsta} className="text-pink-500 hover:text-pink-700">
+                  <div onClick={handleInsta} className="text-pink-500 hover:text-pink-700 cursor-pointer">
                     <FaInstagram size={30} />
                   </div>
                 </div>
