@@ -57,6 +57,7 @@ const CodingPlatformData = ({ username, platform, userdata, contestData }) => {
         pointRadius: 4,
         pointHoverRadius: 6,
         pointBackgroundColor: '#fff',
+        tension: 0.3, // Adjust the tension here (default is 0.4)
       },
     ],
   };

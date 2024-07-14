@@ -30,7 +30,7 @@ const CodingStatsCard = ({tq,tc,list}) => {
   };
 
   return (
-    <div className="max-w-sm bg-gray-800 text-white rounded-lg shadow-lg overflow-hidden p-6 m-4">
+    <div className="md:max-w-sm w-full bg-gray-800 text-white rounded-lg shadow-lg overflow-hidden p-6 md:m-4">
       <h2 className="text-xl font-bold mb-4">Total Questions Solved: <p className=' text-gray-400'>{tq}</p></h2>
       <h2 className="text-xl font-bold mb-4">Total Contests Given: <p className=' text-gray-400'>{tc}</p></h2>
       <div className="relative h-64">
