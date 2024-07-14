@@ -257,6 +257,7 @@ function App() {
       .catch((error) => {
         console.error('Error copying profile URL to clipboard:', error);
       });
+      alert("Link Copied to ClipBoard !")
 
   }
 
@@ -282,25 +283,15 @@ function App() {
                     Upcoming Contests
                   </a>
                 </Link>
-                <Link to="/login">
-                  <a href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                    Profile
-                  </a>
-                </Link>
-                <a href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                  About
-                </a>
+                
+                
               </div>
             </div>
-            <div className="hidden md:block">
+            {/* <div className="hidden md:block">
               <div className="ml-4 flex items-center md:ml-6">
-                <Link to="/login">
-                  <a href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                    Login/Signup
-                  </a>
-                </Link>
+                
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </nav>
@@ -309,7 +300,7 @@ function App() {
         <div className="bg-gray-900 grid grid-cols-1 md:grid-cols-2">
           <div className="flex justify-center items-center bg-gray-900 p-2 md:p-4">
             <div className="md:max-w-sm w-full bg-gray-800 text-white rounded-lg shadow-lg p-6 space-y-6">
-              <div className="flex items-center justify-between gap-4">
+              <div className="flex items-center justify-between gap-4 flex-col md:flex-row">
                 <div className=''>
                   <h2 className="text-2xl font-bold">Username: {username}</h2>
                   <p className="text-gray-400">

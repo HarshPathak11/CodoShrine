@@ -1,59 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { FaCode, FaBell, FaLaptop, FaUser, FaEnvelope } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import Navbar from './Navbar';
 
 const HomePage = () => {
-  const [navbarSolid, setNavbarSolid] = useState(false);
-
-  const handleScroll = () => {
-    if (window.scrollY > 50) {
-      setNavbarSolid(true);
-    } else {
-      setNavbarSolid(false);
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
+  
   return (
     <div className="min-h-screen bg-gray-900 text-white">
-      <nav
-        className={`fixed z-10 top-0 w-full transition-all duration-300 ${navbarSolid ? 'bg-gray-800' : 'bg-gray-500 bg-opacity-50'}`}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center">
-              <div className="text-white text-xl font-bold">CodeShrine</div>
-            </div>
-            <div className="hidden md:block">
-              <div className="ml-10 flex items-baseline space-x-4">
-                <Link to="/"><a href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                  Home
-                </a></Link>
-                <Link  to="/cal" ><a href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                  Upcoming Contests
-                </a></Link>
-                <Link to="/login"><a href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                  Profile
-                </a></Link>
-                <a href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                  About
-                </a>
-              </div>
-            </div>
-            <div className="hidden md:block">
-              <div className="ml-4 flex items-center md:ml-6">
-                <Link to="/login"><a href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                  Login/Signup
-                </a></Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navbar/>
 
       <header className="relative pt-24 pb-32 flex content-center items-center justify-center min-h-screen">
         <div className="absolute top-0 w-full h-full bg-center bg-cover opacity-50">
@@ -65,10 +19,14 @@ const HomePage = () => {
               <div className="">
                 <h1 className="text-white font-semibold text-4xl m-2">
                   Welcome to CodeShrine
-                </h1>
-                <p className="m-4 text-lg text-gray-300">
-                  Your one-stop platform to track and showcase your coding progress.
-                </p>
+                </h1> <p>Your one-stop platform to track and showcase your coding progress.</p>
+                <div className='mt-10 ml-8 text-left'>
+                <h3 className='text-white font-semibold text-2xl m-3'>What is CodeShrine ?</h3>
+                <p className="m-4 text-lg text-gray-300 text-pretty">
+                With the increasing popularity of Competitive Programming, it's easy to lose track of upcoming coding contests and challenges across various platforms. Missing out on valuable contests can be frustrating. But worry no more! With CodeShrine, you can effortlessly keep track of all your contest profiles in one place and never miss another competition.
+
+Simply sign up with an active email to start receiving reminders for upcoming contests. CodeShrine is your one-stop platform to monitor and showcase your coding progress. Stay on top of your game and ensure you never miss an opportunity to compete and improve.
+                </p></div>
                 <Link to="/register"><button className="mt-4 bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700">
                   Sign Up Now
                 </button></Link>

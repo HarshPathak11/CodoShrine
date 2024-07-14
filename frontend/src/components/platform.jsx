@@ -135,7 +135,7 @@ const CodingPlatformData = ({ username, platform, userdata, contestData }) => {
         </div>
         <div className='w-full md:w-auto'>
           <h3 className="text-xl font-semibold mb-4">Previous Ratings</h3>
-          <div className='h-[70vw] mt-6 md:mt-0 md:w-[40vw] md:h-64 md:flex md:justify-center'><Line data={lineData} options={chartOptions} /></div>
+          <div className='h-[37vw] mt-6 md:mt-0 md:w-[40vw] md:h-64 md:flex md:justify-center'><Line data={lineData} options={chartOptions} /></div>
         </div>
       </div>
 

@@ -7,7 +7,7 @@ function Register(){
     return(
         <div>
             <section>
-      <div class="content h-[70vh] flex-col">   
+      <div class="content h-[80vh] flex-col">   
        <SignUpForm/>
       </div>
 

@@ -125,7 +125,7 @@ const PublicProfile = () => {
                         <div className="">
                             <div className="ml-4 flex items-center md:ml-6">
                                 <Link to="/" className='text-white capitalize font-bold tracking-wide'>
-                                    make you profile to ;-)
+                                    <button className='text-white bg-blue-500 hover:bg-blue-700 px-3 py-1 rounded flex items-center'>Why not make yours?</button>
                                 </Link>
                             </div>
                         </div>

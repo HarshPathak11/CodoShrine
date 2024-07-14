@@ -11,6 +11,7 @@ import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 import Landing from './components/loginpage.jsx'
 import Register from './components/loguppage.jsx'
 import PublicProfile from './components/PublicProfile.jsx'
+import Developer from './components/about.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -35,6 +36,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         </div>} />
         <Route path='/dash' element={<App />} />
         <Route path='/cal' element={<UpcomingContestPage />} />
+        <Route path='/about' element={<Developer/>} />
         {/* <Route path='/nav' element={<Navbar/>} /> */}
       </Routes>
     </BrowserRouter>
