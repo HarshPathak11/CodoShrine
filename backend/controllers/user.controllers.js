@@ -410,7 +410,7 @@ const getUser = async (req, res) => {
 }
 
 
-export { userLogUp, userLogin, getPlatformUserData, addProfile, addLinks, addAbout, getAbout, getLinks, getUser}
+export { userLogUp, userLogin, getPlatformUserData, addProfile, addLinks, addAbout, getAbout, getLinks, getUser }
 
 
 
