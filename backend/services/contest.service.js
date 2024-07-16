@@ -3,6 +3,7 @@ import sendEmailToAllUsers from './email.service.js';
 import { User } from '../model/user.model.js';
 
 const oneHourInMillis = 1 * 60 * 60 * 1000;
+const maxTime = 55 * 60 * 1000;
 
 const initialBiweeklyDate = new Date('2024-07-20T20:00:00+05:30'); // 20th July 2024, 8:00 PM IST
 
@@ -13,7 +14,7 @@ const getChefContests = async () => {
     const timeOfNextChefContest = new Date(contests[0].contest_start_date);
     const timeDifference = timeOfNextChefContest - Date.now();
 
-    if (timeDifference > 0 && timeDifference < oneHourInMillis) {
+    if (timeDifference > maxTime && timeDifference < oneHourInMillis) {
         const message = `The ${contests[0].contest_name} contest on CodeChef starts within the next hour. Good luck!`;
         const users = await User.find({ "platformProfiles.codechef.isId": true });
         await sendEmailToAllUsers(message, users);
@@ -57,7 +58,7 @@ const getLeetContest = async () => {
         const weeklyTimeDifference = nextSundayAt8AMIST - Date.now();
         const biweeklyTimeDifference = nextBiweeklyAt8PMIST - Date.now();
 
-        if (weeklyTimeDifference > 0 && weeklyTimeDifference < oneHourInMillis) {
+        if (weeklyTimeDifference > maxTime && weeklyTimeDifference < oneHourInMillis) {
             const message = `The Weekly contest on LeetCode starts within the next hour. Good luck!`;
             const users = await User.find({ "platformProfiles.leetcode.isId": true });
             await sendEmailToAllUsers(message, users);
@@ -65,7 +66,7 @@ const getLeetContest = async () => {
             console.log('No LeetCode weekly contests starting within the next hour.');
         }
 
-        if (biweeklyTimeDifference > 0 && biweeklyTimeDifference < oneHourInMillis) {
+        if (biweeklyTimeDifference > maxTime && biweeklyTimeDifference < oneHourInMillis) {
             const message = `The Biweekly contest on LeetCode starts within the next hour. Good luck!`;
             const users = await User.find({ "platformProfiles.leetcode.isId": true });
             await sendEmailToAllUsers(message, users);

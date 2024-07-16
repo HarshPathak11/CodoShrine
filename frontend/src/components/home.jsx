@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 import Navbar from './Navbar';
 
 const HomePage = () => {
-  
+
   return (
     <div className="min-h-screen bg-gray-900 text-white">
-      <Navbar/>
+      <Navbar />
 
       <header className="relative pt-24 pb-32 flex content-center items-center justify-center min-h-screen">
         <div className="absolute top-0 w-full h-full bg-center bg-cover opacity-50">
@@ -21,12 +21,12 @@ const HomePage = () => {
                   Welcome to CodeShrine
                 </h1> <p>Your one-stop platform to track and showcase your coding progress.</p>
                 <div className='mt-10 ml-8 text-left'>
-                <h3 className='text-white font-semibold text-2xl m-3'>What is CodeShrine ?</h3>
-                <p className="m-4 text-lg text-gray-300 text-pretty">
-                With the increasing popularity of Competitive Programming, it's easy to lose track of upcoming coding contests and challenges across various platforms. Missing out on valuable contests can be frustrating. But worry no more! With CodeShrine, you can effortlessly keep track of all your contest profiles in one place and never miss another competition.
+                  <h3 className='text-white font-semibold text-2xl m-3'>What is CodeShrine ?</h3>
+                  <p className="m-4 text-lg text-gray-300 text-pretty">
+                    With the increasing popularity of Competitive Programming, it's easy to lose track of upcoming coding contests and challenges across various platforms. Missing out on valuable contests can be frustrating. But worry no more! With CodeShrine, you can effortlessly keep track of all your contest profiles in one place and never miss another competition.
 
-Simply sign up with an active email to start receiving reminders for upcoming contests. CodeShrine is your one-stop platform to monitor and showcase your coding progress. Stay on top of your game and ensure you never miss an opportunity to compete and improve.
-                </p></div>
+                    Simply sign up with an active email to start receiving reminders for upcoming contests. CodeShrine is your one-stop platform to monitor and showcase your coding progress. Stay on top of your game and ensure you never miss an opportunity to compete and improve.
+                  </p></div>
                 <Link to="/register"><button className="mt-4 bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700">
                   Sign Up Now
                 </button></Link>
@@ -107,7 +107,7 @@ Simply sign up with an active email to start receiving reminders for upcoming co
               </div>
             </div>
 
-            
+
 
             <div className="w-full md:w-4/12 px-4 text-center">
               <div className="relative flex flex-col min-w-0 break-words bg-gray-800 w-full mb-8 shadow-lg rounded-lg">
@@ -126,7 +126,7 @@ Simply sign up with an active email to start receiving reminders for upcoming co
         </div>
       </section>
 
-      <section className="bg-gray-800 py-20">
+      {/* <section className="bg-gray-800 py-20">
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap justify-center text-center mb-24">
             <div className="w-full lg:w-6/12 px-4">
@@ -171,6 +171,53 @@ Simply sign up with an active email to start receiving reminders for upcoming co
             </div>
           </div>
         </div>
+      </section> */}
+
+      <section className="bg-gray-800 py-20">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-wrap justify-center text-center mb-24">
+            <div className="w-full lg:w-6/12 px-4">
+              <h2 className="text-4xl font-semibold text-white">What Our Users Say</h2>
+              <p className="text-lg leading-relaxed m-4 text-gray-400">
+                Hear from our satisfied users
+              </p>
+            </div>
+          </div>
+          <div className="flex flex-wrap">
+            <div className="w-full md:w-4/12 px-4 text-center">
+              <div className="relative flex flex-col min-w-0 break-words bg-gray-700 w-full mb-8 shadow-lg rounded-lg p-6">
+                <div className="px-4 py-5 flex-auto">
+                  <p className="mt-2 mb-4 text-gray-400">
+                    "Knowledge is power, and CodeShrine is a treasure trove. Imagine having all your coding profiles in one place and tracking upcoming contests effortlessly. It's like having a map to navigate the coding world. CodeShrine is my indispensable companion, helping me achieve my goals and share my journey with others."
+                  </p>
+                  <h6 className="text-xl font-semibold text-white">- Nico Robin</h6>
+                </div>
+              </div>
+            </div>
+
+            <div className="w-full md:w-4/12 px-4 text-center">
+              <div className="relative flex flex-col min-w-0 break-words bg-gray-700 w-full mb-8 shadow-lg rounded-lg p-6">
+                <div className="px-4 py-5 flex-auto">
+                  <p className="mt-2 mb-4 text-gray-400">
+                    "With CodeShrine, I can see all my coding profiles in one place and never miss a contest. It's like seeing infinity in a single glance! The reminders are a lifesaver, and sharing my profile with friends and rivals has never been easier. CodeShrine keeps me sharp and ready for the next big challenge."
+                  </p>
+                  <h6 className="text-xl font-semibold text-white">- Satoru Gojo</h6>
+                </div>
+              </div>
+            </div>
+
+            <div className="w-full md:w-4/12 px-4 text-center">
+              <div className="relative flex flex-col min-w-0 break-words bg-gray-700 w-full mb-8 shadow-lg rounded-lg p-6">
+                <div className="px-4 py-5 flex-auto">
+                  <p className="mt-2 mb-4 text-gray-400">
+                    "Believe it! CodeShrine is my secret weapon to track upcoming contests and share my coding journey with friends. Dattebayo! Whether it's seeing all my profiles in one place or getting crucial reminders, CodeShrine keeps me pumped and ready for every challenge. It's a must-have for every coding ninja!"
+                  </p>
+                  <h6 className="text-xl font-semibold text-white">- Naruto Uzumaki</h6>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <footer className="bg-gray-900 py-8">
@@ -179,11 +226,11 @@ Simply sign up with an active email to start receiving reminders for upcoming co
             <div className="w-full lg:w-6/12 px-4 text-center">
               <h4 className="text-3xl font-semibold text-white">Stay Connected</h4>
               <p className="text-lg leading-relaxed mt-4 mb-4 text-gray-400">
-                Check the About section to follow us on our social media platforms for the latest updates and news. To report any feedback, contact us below: 
+                Check the About section to follow us on our social media platforms for the latest updates and news. To report any feedback, contact us below:
               </p>
               <div className="mt-6">
                 <button className="" type="button">
-                  <span className='flex text-gray-300'><FaEnvelope className='m-1'/>  codeshrine98@gmail.com</span>
+                  <span className='flex text-gray-300'><FaEnvelope className='m-1' />  codeshrine98@gmail.com</span>
                 </button>
                 {/* <button className="bg-white text-blue-500 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2" type="button">
                   <FaBell />
