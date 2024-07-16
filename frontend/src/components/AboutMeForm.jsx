@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 
 function AboutMeForm({ handleAboutForm, username }) {
   const [aboutMe, setAboutMe] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [loading, setLoading] = useState(false); // State to track loading state
+
+  const copySuccess = () => toast.success('Successfully submitted About Me');
+  const copyError = () => toast.error('Some error occurred');
 
   const handleChange = (e) => {
     const inputValue = e.target.value;
@@ -17,22 +22,24 @@ function AboutMeForm({ handleAboutForm, username }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true); // Set loading to true while submitting
     try {
-      // Handle submission of aboutMe
       const response = await axios.post('https://codeshrine.onrender.com/addAbout', {
         username: username,
         about: aboutMe
       });
 
       if (response.status === 200) {
-        alert(`Successfully submitted About Me`);
+        copySuccess();
       } else {
-        alert(`Submission failed with status`);
+        copyError();
       }
       handleAboutForm();
     } catch (error) {
       console.error('Error submitting About Me:', error);
-      alert('An error occurred while submitting your About Me. Please try again later.');
+      copyError();
+    } finally {
+      setLoading(false); // Reset loading state after submission completes
     }
   };
 
@@ -66,9 +73,10 @@ function AboutMeForm({ handleAboutForm, username }) {
           </div>
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+            className="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 relative"
+            disabled={loading} // Disable button when loading
           >
-            Submit
+            {loading ? 'Submitting...' : 'Submit'}
           </button>
         </form>
       </div>
