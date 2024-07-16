@@ -41,8 +41,8 @@ const Navbar = () => {
                 <a href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Profile</a>
               </Link>
               <Link to="/about">
-          <a href="#" className="block text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-medium">About</a>
-          </Link>
+                <a href="#" className="block text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">About</a>
+              </Link>
             </div>
           </div>
           <div className="hidden md:block">
@@ -71,7 +71,7 @@ const Navbar = () => {
             <a href="#" className="block text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-medium">Profile</a>
           </Link>
           <Link to="/about">
-          <a href="#" className="block text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-medium">About</a>
+            <a href="#" className="block text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-medium">About</a>
           </Link>
           <Link to="/login">
             <a href="#" className="block text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-medium">Login/Signup</a>

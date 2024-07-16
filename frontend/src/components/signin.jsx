@@ -8,9 +8,9 @@ const SignInForm = () => {
   
   const navigate=useNavigate();
   async function formonSubmit(event){
-     console.log(event)
+    //  console.log(event)
       event.preventDefault();
-      const response= await fetch('http://localhost:8000/signin',{
+      const response= await fetch('https://codeshrine.onrender.com/signin',{
         method: 'POST',
         headers: {
           'Content-Type': 'application/json' // Specify the content type as JSON
@@ -23,7 +23,7 @@ const SignInForm = () => {
       
       if(response.ok){
         const dataset=await response.json();
-        console.log(dataset)
+        // console.log(dataset)
         return navigate('/dash',{state:{username:dataset.username,email:dataset.email,platformProfiles:dataset.platformProfiles}})
       }
       else{

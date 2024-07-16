@@ -21,9 +21,9 @@ const PublicProfile = () => {
             try {
                 // Fetch all data concurrently
                 const [userResponse, dataResponse, contestsResponse] = await Promise.all([
-                    axios.post('http://localhost:8000/getUser', { username }),
-                    axios.post('http://localhost:8000/data', { username }),
-                    axios.post('http://localhost:8000/getRecentContests', { username }),
+                    axios.post('https://codeshrine.onrender.com/getUser', { username }),
+                    axios.post('https://codeshrine.onrender.com/data', { username }),
+                    axios.post('https://codeshrine.onrender.com/getRecentContests', { username }),
                 ]);
 
                 const userData = userResponse.data;
@@ -31,17 +31,17 @@ const PublicProfile = () => {
                 const contestData = contestsResponse.data;
 
                 setUserData(userData);
-                console.log("User Data: ", userData);
+                // console.log("User Data: ", userData);
                 setPlatUserData(data);
                 setTotalq(data.leetcode.totalQuestionSolved + data.codechef.totalQuestionSolved);
                 setTotalContest(data.leetcode.totalContestsParticipated + data.codechef.totalContestsParticipated);
                 setList([data.leetcode.totalQuestionSolved, data.codechef.totalQuestionSolved]);
-                console.log("Total Questions: ", data.leetcode.totalQuestionSolved + data.codechef.totalQuestionSolved);
-                console.log("Total Contests: ", data.leetcode.totalContestsParticipated + data.codechef.totalContestsParticipated);
-                console.log("List: ", [data.leetcode.totalQuestionSolved, data.codechef.totalQuestionSolved]);
+                // console.log("Total Questions: ", data.leetcode.totalQuestionSolved + data.codechef.totalQuestionSolved);
+                // console.log("Total Contests: ", data.leetcode.totalContestsParticipated + data.codechef.totalContestsParticipated);
+                // console.log("List: ", [data.leetcode.totalQuestionSolved, data.codechef.totalQuestionSolved]);
 
                 setContestData(transformContestData(contestData));
-                console.log("Contest Data: ", transformContestData(contestData));
+                // console.log("Contest Data: ", transformContestData(contestData));
 
                 setLoading(false); // Set loading to false after data is fetched
             } catch (error) {

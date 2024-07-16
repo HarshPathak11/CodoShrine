@@ -19,7 +19,7 @@ function AboutMeForm({ handleAboutForm, username }) {
     event.preventDefault();
     try {
       // Handle submission of aboutMe
-      const response = await axios.post('http://localhost:8000/addAbout', {
+      const response = await axios.post('https://codeshrine.onrender.com/addAbout', {
         username: username,
         about: aboutMe
       });

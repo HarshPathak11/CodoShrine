@@ -1,17 +1,14 @@
-import React, { useState } from 'react';
-import { FaCalendarAlt } from 'react-icons/fa';
-// import CalendarView from './CalendarView';
+import React, { useEffect, useState } from 'react';
 import Table from './table';
-import { Link } from 'react-router-dom';
 import Navbar from './Navbar';
 
 
 const UpcomingContestPage = () => {
   const [contestList, setContestList] = React.useState([])
 
-  React.useEffect(() => {
+  useEffect(() => {
     async function getContests() {
-      const response = await fetch('http://localhost:8000/getContestsList', {
+      const response = await fetch('https://codeshrine.onrender.com/getContestsList', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json' // Specify the content type as JSON
@@ -52,42 +49,23 @@ const UpcomingContestPage = () => {
 
           return list;
         };
-        const b = transformContestData(data)
-        console.log(b);
-        setContestList(b)
+
+        const contests = transformContestData(data);
+        // console.log(contests);
+        setContestList(contests);
       }
     }
-    getContests()
-  }, [])
-  const contests = [
-    { platform: 'Codeforces', contest: 'Codeforces Round #690', date: '2024-07-12', time: '17:00 UTC' },
-    { platform: 'LeetCode', contest: 'Weekly Contest 250', date: '2024-07-13', time: '14:30 UTC' },
-    { platform: 'AtCoder', contest: 'AtCoder Beginner Contest 200', date: '2024-07-14', time: '12:00 UTC' },
-    { platform: 'HackerRank', contest: 'Week of Code 40', date: '2024-07-15', time: '10:00 UTC' },
-    { platform: 'Codeforces', contest: 'Codeforces Round #691', date: '2024-07-18', time: '18:00 UTC' },
-    { platform: 'LeetCode', contest: 'Biweekly Contest 55', date: '2024-07-20', time: '15:00 UTC' },
-    { platform: 'AtCoder', contest: 'AtCoder Grand Contest 50', date: '2024-07-21', time: '13:00 UTC' },
-    { platform: 'HackerRank', contest: 'CodeSprint 10', date: '2024-07-22', time: '11:00 UTC' },
-    { platform: 'Codeforces', contest: 'Codeforces Round #692', date: '2024-07-25', time: '17:30 UTC' },
-    { platform: 'LeetCode', contest: 'Weekly Contest 251', date: '2024-07-27', time: '14:00 UTC' },
-    { platform: 'AtCoder', contest: 'AtCoder Beginner Contest 201', date: '2024-07-28', time: '12:30 UTC' },
-    { platform: 'HackerRank', contest: 'HourRank 34', date: '2024-07-29', time: '09:00 UTC' },
-    { platform: 'Codeforces', contest: 'Codeforces Round #693', date: '2024-08-01', time: '16:00 UTC' },
-    { platform: 'LeetCode', contest: 'Biweekly Contest 56', date: '2024-08-03', time: '15:30 UTC' },
-    { platform: 'AtCoder', contest: 'AtCoder Grand Contest 51', date: '2024-08-04', time: '11:00 UTC' },
-    { platform: 'HackerRank', contest: 'Week of Code 41', date: '2024-08-05', time: '08:00 UTC' }
-  ];
+
+    getContests();
+  }, []);
 
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedPlatform, setSelectedPlatform] = useState('');
-  const [view, setView] = useState('table'); // 'table' or 'calendar'
 
 
   return (
     <div className="min-h-screen bg-gray-900 text-white">
-
       <Navbar />
-
       <div className="max-w-4xl w-full space-y-8 py-12 px-4 sm:px-6 lg:px-8 mx-auto">
         <div className="text-center">
           <h2 className="mt-10 text-3xl font-extrabold">Upcoming Programming Contests</h2>
@@ -112,7 +90,6 @@ const UpcomingContestPage = () => {
             <option value="AtCoder">AtCoder</option>
             <option value="HackerRank">HackerRank</option>
           </select>
-
         </div>
         {contestList.length !== 0 && <Table contests={contestList} searchTerm={searchTerm} selectedPlatform={selectedPlatform} />}
       </div>
@@ -122,6 +99,5 @@ const UpcomingContestPage = () => {
     </div>
   );
 };
-
 
 export default UpcomingContestPage;

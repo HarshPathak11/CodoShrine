@@ -10,9 +10,9 @@ const SignUpForm = () => {
 
   async function formOnRegister(event){
     event.preventDefault();
-    console.log("ho");
+    // console.log("ho");
 
-    const response=await fetch("http://localhost:8000/signup",{
+    const response=await fetch("https://codeshrine.onrender.com/signup",{
       method:'POST',
       headers:{
         'Content-Type':'application/json'
@@ -28,7 +28,7 @@ const SignUpForm = () => {
 
     if(response.ok){
       const dataset=await response.json();
-      console.log(dataset)
+      // console.log(dataset)
       return navigate('/dash',{state:{username:dataset.username,email:dataset.email,platformProfiles:dataset.platformProfiles}})
     }
     else{

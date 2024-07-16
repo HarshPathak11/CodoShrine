@@ -40,7 +40,7 @@ const CodingPlatformData = ({ username, platform, userdata, contestData }) => {
       }
     }
     updateLabels()
-    console.log(newLabels)
+    // console.log(newLabels)
   }, [window.innerWidth])
 
   const lineData = {

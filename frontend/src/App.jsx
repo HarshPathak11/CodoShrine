@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import React from 'react';
-import { FaLinkedin, FaGithub, FaInstagram, FaEnvelope, FaPlus, FaSpinner, FaShareAlt } from 'react-icons/fa';
+import { FaLinkedin, FaGithub, FaInstagram, FaEnvelope, FaPlus, FaSpinner, FaShareAlt, FaTimes, FaBars } from 'react-icons/fa';
 import { Link, useLocation } from 'react-router-dom';
 import CodingPlatformData from './components/platform';
 import Modal from './components/popup';
@@ -26,7 +26,12 @@ function App() {
   const [githubLink, setGithubLink] = useState("");
   const [instaLink, setInstaLink] = useState("");
   const location = useLocation();
+  const [isOpen, setIsOpen] = useState(false);
   const { username, email, platformProfiles } = location.state;
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
 
   useEffect(() => {
     if (platformProfiles && profiles.length === 0) {
@@ -83,7 +88,7 @@ function App() {
   };
 
   const loadData = async () => {
-    const resp = await fetch('http://localhost:8000/data', {
+    const resp = await fetch('https://codeshrine.onrender.com/data', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -103,7 +108,7 @@ function App() {
   };
 
   const getContestData = async () => {
-    const res = await fetch('http://localhost:8000/getRecentContests', {
+    const res = await fetch('https://codeshrine.onrender.com/getRecentContests', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -123,7 +128,7 @@ function App() {
     setIsModalOpen(false);
     setLoading(true); // start loading
 
-    const response = await fetch('http://localhost:8000/addprofile', {
+    const response = await fetch('https://codeshrine.onrender.com/addprofile', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -167,7 +172,7 @@ function App() {
   const handleMediaForm = async () => {
     setMediaForm(!mediaForm);
     try {
-      const response = await axios.post('http://localhost:8000/getLinks', {
+      const response = await axios.post('https://codeshrine.onrender.com/getLinks', {
         username
       })
 
@@ -186,7 +191,7 @@ function App() {
     setAboutForm(!aboutForm);
     try {
       // Handle submission of aboutMe
-      const response = await axios.post('http://localhost:8000/getAbout', {
+      const response = await axios.post('https://codeshrine.onrender.com/getAbout', {
         username
       });
 
@@ -204,12 +209,12 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const linksResponse = await axios.post('http://localhost:8000/getLinks', {
+        const linksResponse = await axios.post('https://codeshrine.onrender.com/getLinks', {
           username
         });
 
         if (linksResponse.status === 200) {
-          console.log(linksResponse.data);
+          // console.log(linksResponse.data);
           setLinkedinLink(linksResponse.data.linkedIn);
           setGithubLink(linksResponse.data.github);
           setInstaLink(linksResponse.data.insta);
@@ -220,7 +225,7 @@ function App() {
       }
 
       try {
-        const aboutResponse = await axios.post('http://localhost:8000/getAbout', {
+        const aboutResponse = await axios.post('https://codeshrine.onrender.com/getAbout', {
           username
         });
 
@@ -252,12 +257,12 @@ function App() {
     const profileUrl = `${window.location.origin}/profile/${username}`;
     navigator.clipboard.writeText(profileUrl)
       .then(() => {
-        console.log('Profile URL copied to clipboard');
+        // console.log('Profile URL copied to clipboard');
       })
       .catch((error) => {
         console.error('Error copying profile URL to clipboard:', error);
       });
-      alert("Link Copied to ClipBoard !")
+    alert("Link Copied to ClipBoard !")
 
   }
 
@@ -283,17 +288,39 @@ function App() {
                     Upcoming Contests
                   </a>
                 </Link>
-                
-                
+                <Link to="/about">
+                  <a href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                    About
+                  </a>
+                </Link>
               </div>
             </div>
-            {/* <div className="hidden md:block">
-              <div className="ml-4 flex items-center md:ml-6">
-                
-              </div>
-            </div> */}
+            <div className="md:hidden">
+              <button onClick={toggleDropdown} className="text-gray-300 hover:text-white focus:outline-none">
+                {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+              </button>
+            </div>
           </div>
         </div>
+        {isOpen && (
+          <div className="md:hidden bg-gray-800 px-2 pt-2 pb-3 space-y-1">
+            <Link to="/">
+              <a href="#" className="block text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-medium">Home</a>
+            </Link>
+            <Link to="/cal">
+              <a href="#" className="block text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-medium">Upcoming Contests</a>
+            </Link>
+            <Link to="/login">
+              <a href="#" className="block text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-medium">Profile</a>
+            </Link>
+            <Link to="/about">
+              <a href="#" className="block text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-medium">About</a>
+            </Link>
+            <Link to="/login">
+              <a href="#" className="block text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-medium">Login/Signup</a>
+            </Link>
+          </div>
+        )}
       </nav>
 
       <div className="bg-gray-800 text-white w-[100%] rounded-lg shadow-lg p-2 md:p-6 space-y-6 h-[100%] mt-16">
