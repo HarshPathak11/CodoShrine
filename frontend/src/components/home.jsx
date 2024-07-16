@@ -179,13 +179,13 @@ Simply sign up with an active email to start receiving reminders for upcoming co
             <div className="w-full lg:w-6/12 px-4 text-center">
               <h4 className="text-3xl font-semibold text-white">Stay Connected</h4>
               <p className="text-lg leading-relaxed mt-4 mb-4 text-gray-400">
-                Follow us on our social media platforms for the latest updates and news.
+                Check the About section to follow us on our social media platforms for the latest updates and news. To report any feedback, contact us below: 
               </p>
               <div className="mt-6">
-                <button className="bg-white text-blue-500 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2" type="button">
-                  <FaCode />
+                <button className="" type="button">
+                  <span className='flex text-gray-300'><FaEnvelope className='m-1'/>  codeshrine98@gmail.com</span>
                 </button>
-                <button className="bg-white text-blue-500 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2" type="button">
+                {/* <button className="bg-white text-blue-500 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2" type="button">
                   <FaBell />
                 </button>
                 <button className="bg-white text-blue-500 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2" type="button">
@@ -196,7 +196,7 @@ Simply sign up with an active email to start receiving reminders for upcoming co
                 </button>
                 <button className="bg-white text-blue-500 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2" type="button">
                   <FaEnvelope />
-                </button>
+                </button> */}
               </div>
             </div>
           </div>

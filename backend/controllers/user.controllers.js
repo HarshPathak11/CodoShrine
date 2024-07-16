@@ -29,7 +29,7 @@ const userLogUp = async (req, res) => {
   )
   if (!createdUser)
     res.status(500).json({ "message": "Could not create user" })
-  console.log(createdUser)
+  // console.log(createdUser)
   return res.status(201).json(createdUser)
 }
 
@@ -155,8 +155,8 @@ const getPlatformUserData = async (req, res) => {
   let leetData = user.platformProfiles.leetcode;
   let chefData = user.platformProfiles.codechef;
 
-  console.log(leetData)
-  console.log(chefData)
+  // console.log(leetData)
+  // console.log(chefData)
 
   if (leetData === undefined)
     leetData = { isId: false }
@@ -260,7 +260,7 @@ const addProfile = async (req, res) => {
     },
     { new: true } // Return the updated user
   );
-  console.log(user)
+  // console.log(user)
   if (!user)
     res.status(500).json({ "message": "something went wrong" })
   res.status(200).json({ "message": "profile added successfully" })

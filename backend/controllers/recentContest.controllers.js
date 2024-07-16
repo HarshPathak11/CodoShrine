@@ -8,7 +8,7 @@ const getRecentContests = async (req, res) => {
         if (!user) {
             res.status(400).json({ message: "User not found" });
         }
-        console.log(user)
+        // console.log(user)
         const recentContests = {
             leetcode: [],
             codechef: []

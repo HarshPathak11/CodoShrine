@@ -31,6 +31,6 @@ app.post("/getLinks", getLinks);
 app.post("/getUser", getUser);
 app.listen(8000, () => {
     console.log('server running on http://localhost:8000')
-    //scheduling the job for fetching 
-    // scheduleJobs();
+    // scheduling the job for fetching 
+    scheduleJobs();
 })
