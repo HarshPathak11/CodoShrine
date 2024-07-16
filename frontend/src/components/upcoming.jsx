@@ -22,6 +22,8 @@ const UpcomingContestPage = () => {
           // Process CodeChef contests
           data.codechef.forEach(contest => {
             const startDate = new Date(contest.contest_start_date_iso);
+            startDate.setHours(startDate.getHours() + 5);
+            startDate.setMinutes(startDate.getMinutes() + 30);
             const formattedDate = startDate.toISOString().split('T')[0]; // Extracting date in YYYY-MM-DD format
             const formattedTime = startDate.toISOString().split('T')[1].split('.')[0]; // Extracting time in HH:MM:SS format
 
@@ -29,24 +31,45 @@ const UpcomingContestPage = () => {
               platform: 'CodeChef',
               contest: contest.contest_name.trim(),
               date: formattedDate,
-              time: `${formattedTime} UTC`
+              time: `${formattedTime} IST`
             });
           });
 
           // Process LeetCode contests
           data.leetcode.forEach(contest => {
             const startDate = new Date(contest.contest_start_date);
-            const formattedDate = startDate.toISOString().split('T')[0]; // Extracting date in YYYY-MM-DD format
-            const formattedTime = startDate.toISOString().split('T')[1].split('.')[0]; // Extracting time in HH:MM:SS format
+
+            // Add 5 hours and 30 minutes to startDate
+            startDate.setHours(startDate.getHours() + 10);
+            startDate.setMinutes(startDate.getMinutes() + 60);
+
+            // Extract formatted date (YYYY-MM-DD)
+            const formattedDate = startDate.toISOString().split('T')[0];
+
+            // Extract formatted time (HH:MM:SS)
+            const formattedTime = startDate.toISOString().split('T')[1].split('.')[0];
 
             list.push({
               platform: 'LeetCode',
               contest: contest.contest_name.trim(),
               date: formattedDate,
-              time: `${formattedTime} UTC`
+              time: `${formattedTime} IST`
             });
           });
 
+          //list sorting 
+          list.sort((a, b) => {
+            // Compare dates first
+            if (a.date < b.date) return -1;
+            if (a.date > b.date) return 1;
+        
+            // If dates are the same, compare times
+            if (a.time < b.time) return -1;
+            if (a.time > b.time) return 1;
+        
+            return 0;
+          });
+        
           return list;
         };
 
@@ -66,10 +89,10 @@ const UpcomingContestPage = () => {
   return (
     <div className="min-h-screen bg-gray-900 text-white">
       <Navbar />
-      <div className="max-w-4xl w-full space-y-8 py-12 px-4 sm:px-6 lg:px-8 mx-auto">
+      <div className="max-w-6xl w-full space-y-8 py-12 px-4 sm:px-6 lg:px-8 mx-auto">
         <div className="text-center">
           <h2 className="mt-10 text-3xl font-extrabold">Upcoming Programming Contests</h2>
-          <p className="mt-2 text-sm text-gray-600">Stay updated with the latest contests from various platforms</p>
+          <p className="mt-2 text-sm text-gray-400">Stay updated with the latest contests from various platforms</p>
         </div>
         <div className="grid grid-flow-row md:grid-cols-2 mb-4">
           <input
@@ -94,7 +117,7 @@ const UpcomingContestPage = () => {
         {contestList.length !== 0 && <Table contests={contestList} searchTerm={searchTerm} selectedPlatform={selectedPlatform} />}
       </div>
       <h1 className='md:hidden text-center flex items-center justify-center gap-3'>Swipe left on table to see info
-        <video src="\src\media\svg.mp4" autoPlay muted loop className='w-10 h-10 bg-clip-content'></video>
+        <video src="\src\media\svg.mp4" autoPlay muted loop className='w-10 h-10'></video>
       </h1>
     </div>
   );

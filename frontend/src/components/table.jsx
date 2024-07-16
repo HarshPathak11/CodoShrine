@@ -65,7 +65,7 @@ const Table = ({ contests, searchTerm, selectedPlatform }) => {
     // console.log('Is filteredContests an array?', Array.isArray(filteredContests));
 
     return (
-        <div className="bg-white shadow overflow-hidden sm:rounded-lg">
+        <div className="bg-white shadow overflow-hidden rounded-lg">
             <div className="overflow-x-auto">
                 <table className="min-w-full divide-y divide-gray-200">
                     <thead className="bg-gray-50 dark:bg-gray-700">

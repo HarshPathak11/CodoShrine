@@ -8,6 +8,7 @@ import CodingStatsCard from './components/Card';
 import SocialMediaForm from './components/SocialMediaForm';
 import AboutMeForm from './components/AboutMeForm';
 import axios from 'axios';
+import toast, { Toaster } from 'react-hot-toast';
 
 function App() {
   const [profiles, setProfiles] = useState([]);
@@ -28,6 +29,8 @@ function App() {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const { username, email, platformProfiles } = location.state;
+
+  const copySucess = () => toast.success('Link Copied to Clipboard !');
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -262,7 +265,8 @@ function App() {
       .catch((error) => {
         console.error('Error copying profile URL to clipboard:', error);
       });
-    alert("Link Copied to ClipBoard !")
+    // alert("Link Copied to ClipBoard !")
+    copySucess();
 
   }
 
@@ -409,6 +413,7 @@ function App() {
           </div>
         )}
       </div>
+      <Toaster />
     </div>
   );
 }
