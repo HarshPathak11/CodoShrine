@@ -5,11 +5,13 @@ import { useNavigate } from 'react-router-dom';
 const SignInForm = () => {
   const [email,setEmail]=React.useState("");
   const [password,setPassword]=React.useState("");
+  const [load,setLoad]=React.useState(false)
   
   const navigate=useNavigate();
   async function formonSubmit(event){
     //  console.log(event)
       event.preventDefault();
+      setLoad(true)
       const response= await fetch('https://codeshrine.onrender.com/signin',{
         method: 'POST',
         headers: {
@@ -24,12 +26,14 @@ const SignInForm = () => {
       if(response.ok){
         const dataset=await response.json();
         // console.log(dataset)
+        setLoad(false)
         return navigate('/dash',{state:{username:dataset.username,email:dataset.email,platformProfiles:dataset.platformProfiles}})
       }
       else{
         alert("Email or Password dont match! Try Again.")
         setEmail("");
         setPassword("");
+        setLoad(false)
       }
   }
   return (
@@ -50,6 +54,7 @@ const SignInForm = () => {
           navigate('/register')
         }} className="m-2 bg-red-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Don't Have an Account? Sign Up</div>
         </div>
+        { load && <div className='flex justify-center'><svg xmlns="http://www.w3.org/2000/svg" className='h-10' viewBox="0 0 200 200"><radialGradient id="a10" cx=".66" fx=".66" cy=".3125" fy=".3125" gradientTransform="scale(1.5)"><stop offset="0" stop-color="#B9FF40"></stop><stop offset=".3" stop-color="#B9FF40" stop-opacity=".9"></stop><stop offset=".6" stop-color="#B9FF40" stop-opacity=".6"></stop><stop offset=".8" stop-color="#B9FF40" stop-opacity=".3"></stop><stop offset="1" stop-color="#B9FF40" stop-opacity="0"></stop></radialGradient><circle transform-origin="center" fill="none" stroke="url(#a10)" stroke-width="20" stroke-linecap="round" stroke-dasharray="200 1000" stroke-dashoffset="0" cx="100" cy="100" r="70"><animateTransform type="rotate" attributeName="transform" calcMode="spline" dur="2" values="360;0" keyTimes="0;1" keySplines="0 0 1 1" repeatCount="indefinite"></animateTransform></circle><circle transform-origin="center" fill="none" opacity=".2" stroke="#B9FF40" stroke-width="20" stroke-linecap="round" cx="100" cy="100" r="70"></circle></svg></div>}
       </form>
     </div>
   );
