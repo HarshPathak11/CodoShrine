@@ -217,10 +217,9 @@ function App() {
         });
 
         if (linksResponse.status === 200) {
-          // console.log(linksResponse.data);
-          setLinkedinLink(linksResponse.data.linkedIn);
-          setGithubLink(linksResponse.data.github);
-          setInstaLink(linksResponse.data.insta);
+          setLinkedinLink(linksResponse.data.linkedIn || "");
+          setGithubLink(linksResponse.data.github || "");
+          setInstaLink(linksResponse.data.insta || "");
         }
       } catch (error) {
         console.error('Error fetching links:', error);
@@ -233,7 +232,7 @@ function App() {
         });
 
         if (aboutResponse.status === 200) {
-          setAboutMe(aboutResponse.data.about);
+          setAboutMe(aboutResponse.data.about || "-");
         }
       } catch (error) {
         console.error('Error fetching About Me:', error);
@@ -354,13 +353,13 @@ function App() {
                   </button>
                 </div>
                 <div className="flex justify-around items-center">
-                  <div onClick={handleLinked} className="text-blue-500 hover:text-blue-700 cursor-pointer">
+                  <div onClick={linkedinLink !== "" ? handleLinked : null} className={`text-blue-500 ${linkedinLink !== "" ? 'cursor-pointer hover:text-blue-700' : 'cursor-not-allowed opacity-50'}`}>
                     <FaLinkedin size={30} />
                   </div>
-                  <div onClick={handleGit} className="text-gray-100 hover:text-gray-400 cursor-pointer">
+                  <div onClick={githubLink !== "" ? handleGit : null} className={`text-gray-100 ${githubLink !== "" ? 'hover:text-gray-400 cursor-pointer' : 'cursor-not-allowed opacity-50'}`}>
                     <FaGithub size={30} />
                   </div>
-                  <div onClick={handleInsta} className="text-pink-500 hover:text-pink-700 cursor-pointer">
+                  <div onClick={instaLink !== "" ? handleInsta : null} className={`text-pink-500 ${instaLink !== "" ? 'hover:text-pink-700 cursor-pointer' : 'cursor-not-allowed opacity-50'}`}>
                     <FaInstagram size={30} />
                   </div>
                 </div>

@@ -15,6 +15,9 @@ const PublicProfile = () => {
     const [list, setList] = useState([]);
     const [contestData, setContestData] = useState({});
     const [loading, setLoading] = useState(true); // state to track loading status
+    const [linkedinLink, setLinkedinLink] = useState("");
+    const [githubLink, setGithubLink] = useState("");
+    const [instaLink, setInstaLink] = useState("");
 
     useEffect(() => {
         const fetchData = async () => {
@@ -31,6 +34,9 @@ const PublicProfile = () => {
                 const contestData = contestsResponse.data;
 
                 setUserData(userData);
+                setInstaLink(userData.insta || "");
+                setLinkedinLink(userData.linkedIn || "");
+                setGithubLink(userData.github || "");
                 // console.log("User Data: ", userData);
                 setPlatUserData(data);
                 setTotalq(data.leetcode.totalQuestionSolved + data.codechef.totalQuestionSolved);
@@ -98,15 +104,15 @@ const PublicProfile = () => {
     };
 
     const handleLinked = () => {
-        window.open(userData.linkedIn, '_blank');
+        window.open(linkedinLink, '_blank');
     };
 
     const handleGit = () => {
-        window.open(userData.github, '_blank');
+        window.open(githubLink, '_blank');
     };
 
     const handleInsta = () => {
-        window.open(userData.insta, '_blank');
+        window.open(instaLink, '_blank');
     };
 
     return (
@@ -148,13 +154,13 @@ const PublicProfile = () => {
                                     <h3 className="text-xl font-semibold mb-2">Social Media</h3>
                                 </div>
                                 <div className="flex justify-around items-center">
-                                    <div onClick={handleLinked} className="text-blue-500 hover:text-blue-700 cursor-pointer">
+                                    <div onClick={linkedinLink !== "" ? handleLinked : null} className={`text-blue-500 ${linkedinLink !== "" ? 'cursor-pointer hover:text-blue-700' : 'cursor-not-allowed opacity-50'}`}>
                                         <FaLinkedin size={30} />
                                     </div>
-                                    <div onClick={handleGit} className="text-gray-100 hover:text-gray-400 cursor-pointer">
+                                    <div onClick={githubLink !== "" ? handleGit : null} className={`text-gray-100 ${githubLink !== "" ? 'hover:text-gray-400 cursor-pointer' : 'cursor-not-allowed opacity-50'}`}>
                                         <FaGithub size={30} />
                                     </div>
-                                    <div onClick={handleInsta} className="text-pink-500 hover:text-pink-700 cursor-pointer">
+                                    <div onClick={instaLink !== "" ? handleInsta : null} className={`text-pink-500 ${instaLink !== "" ? 'hover:text-pink-700 cursor-pointer' : 'cursor-not-allowed opacity-50'}`}>
                                         <FaInstagram size={30} />
                                     </div>
                                 </div>
@@ -164,7 +170,7 @@ const PublicProfile = () => {
                                     <h3 className="text-xl font-semibold mb-2">About Me</h3>
                                 </div>
                                 <p className="text-gray-400">
-                                    {userData.about}
+                                    {userData.about || "-"}
                                 </p>
                             </div>
                         </div>
