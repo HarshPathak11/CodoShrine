@@ -4,6 +4,7 @@ import { User } from '../model/user.model.js';
 
 const oneHourInMillis = 1 * 60 * 60 * 1000;
 const maxTime = 55 * 60 * 1000;
+const minTime = 25 * 60 * 1000; // minimum time difference to send the email
 
 const initialBiweeklyDate = new Date('2024-07-20T20:00:00+05:30'); // 20th July 2024, 8:00 PM IST
 
@@ -14,7 +15,7 @@ const getChefContests = async () => {
     const timeOfNextChefContest = new Date(contests[0].contest_start_date);
     const timeDifference = timeOfNextChefContest - Date.now();
 
-    if (timeDifference > maxTime && timeDifference < oneHourInMillis) {
+    if (timeDifference >= minTime && timeDifference <= maxTime) {
         const message = `The ${contests[0].contest_name} contest on CodeChef starts within the next hour. Good luck!`;
         const users = await User.find({ "platformProfiles.codechef.isId": true });
         await sendEmailToAllUsers(message, users);
