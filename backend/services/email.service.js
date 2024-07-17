@@ -16,7 +16,8 @@ const sendEmailToAllUsers = async (message, users) => {
             let mailOptions = {
                 from: process.env.EMAIL_USER,
                 to: user.email,
-                subject: 'Contest Reminder!',
+                // subject: 'Contest Reminder!',
+                subject: 'Just Testing',
                 text: message
             };
 
