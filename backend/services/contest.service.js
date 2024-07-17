@@ -3,8 +3,8 @@ import sendEmailToAllUsers from './email.service.js';
 import { User } from '../model/user.model.js';
 
 const oneHourInMillis = 1 * 60 * 60 * 1000;
-const maxTime = 9 * 60 * 1000;
-const minTime = 4 * 60 * 1000; // minimum time difference to send the email
+const maxTime = 7 * 60 * 1000;
+const minTime = 3 * 60 * 1000; // minimum time difference to send the email
 
 const initialBiweeklyDate = new Date('2024-07-20T20:00:00+05:30'); // 20th July 2024, 8:00 PM IST
 
@@ -26,7 +26,7 @@ const getChefContests = async () => {
     ]
     // console.log('CodeChef contests:', contests);
     // Convert contest start date from IST to SGT
-    const timeOfNextChefContestIST = new Date(contests[0].contest_start_date_iso);
+    const timeOfNextChefContestIST = new Date(contests[0].contest_start_date);
     const timeDifferenceISTToSGT = 2.5 * 60 * 60 * 1000; // 2.5 hours in milliseconds
     const timeOfNextChefContestSGT = new Date(timeOfNextChefContestIST.getTime() + timeDifferenceISTToSGT);
 
