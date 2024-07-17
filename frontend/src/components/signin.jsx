@@ -16,7 +16,7 @@ const SignInForm = () => {
     //  console.log(event)
     event.preventDefault();
     setLoad(true)
-    const response = await fetch('https://codeshrine.onrender.com/signin', {
+    const response = await fetch('https://codoshrine.onrender.com/signin', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json' // Specify the content type as JSON

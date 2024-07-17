@@ -91,7 +91,7 @@ function App() {
   };
 
   const loadData = async () => {
-    const resp = await fetch('https://codeshrine.onrender.com/data', {
+    const resp = await fetch('https://codoshrine.onrender.com/data', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -111,7 +111,7 @@ function App() {
   };
 
   const getContestData = async () => {
-    const res = await fetch('https://codeshrine.onrender.com/getRecentContests', {
+    const res = await fetch('https://codoshrine.onrender.com/getRecentContests', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -131,7 +131,7 @@ function App() {
     setIsModalOpen(false);
     setLoading(true); // start loading
 
-    const response = await fetch('https://codeshrine.onrender.com/addprofile', {
+    const response = await fetch('https://codoshrine.onrender.com/addprofile', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -175,7 +175,7 @@ function App() {
   const handleMediaForm = async () => {
     setMediaForm(!mediaForm);
     try {
-      const response = await axios.post('https://codeshrine.onrender.com/getLinks', {
+      const response = await axios.post('https://codoshrine.onrender.com/getLinks', {
         username
       })
 
@@ -194,7 +194,7 @@ function App() {
     setAboutForm(!aboutForm);
     try {
       // Handle submission of aboutMe
-      const response = await axios.post('https://codeshrine.onrender.com/getAbout', {
+      const response = await axios.post('https://codoshrine.onrender.com/getAbout', {
         username
       });
 
@@ -212,7 +212,7 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const linksResponse = await axios.post('https://codeshrine.onrender.com/getLinks', {
+        const linksResponse = await axios.post('https://codoshrine.onrender.com/getLinks', {
           username
         });
 
@@ -227,7 +227,7 @@ function App() {
       }
 
       try {
-        const aboutResponse = await axios.post('https://codeshrine.onrender.com/getAbout', {
+        const aboutResponse = await axios.post('https://codoshrine.onrender.com/getAbout', {
           username
         });
 

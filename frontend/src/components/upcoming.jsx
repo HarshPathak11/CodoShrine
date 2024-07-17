@@ -8,7 +8,7 @@ const UpcomingContestPage = () => {
 
   useEffect(() => {
     async function getContests() {
-      const response = await fetch('https://codeshrine.onrender.com/getContestsList', {
+      const response = await fetch('https://codoshrine.onrender.com/getContestsList', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json' // Specify the content type as JSON

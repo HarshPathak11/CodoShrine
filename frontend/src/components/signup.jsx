@@ -16,7 +16,7 @@ const SignUpForm = () => {
     event.preventDefault();
     // console.log("ho");
     setLoad(true)
-    const response = await fetch("https://codeshrine.onrender.com/signup", {
+    const response = await fetch("https://codoshrine.onrender.com/signup", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

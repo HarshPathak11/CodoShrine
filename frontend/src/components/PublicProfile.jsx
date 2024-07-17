@@ -24,9 +24,9 @@ const PublicProfile = () => {
             try {
                 // Fetch all data concurrently
                 const [userResponse, dataResponse, contestsResponse] = await Promise.all([
-                    axios.post('https://codeshrine.onrender.com/getUser', { username }),
-                    axios.post('https://codeshrine.onrender.com/data', { username }),
-                    axios.post('https://codeshrine.onrender.com/getRecentContests', { username }),
+                    axios.post('https://codoshrine.onrender.com/getUser', { username }),
+                    axios.post('https://codoshrine.onrender.com/data', { username }),
+                    axios.post('https://codoshrine.onrender.com/getRecentContests', { username }),
                 ]);
 
                 const userData = userResponse.data;

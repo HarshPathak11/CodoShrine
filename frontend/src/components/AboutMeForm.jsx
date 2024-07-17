@@ -24,7 +24,7 @@ function AboutMeForm({ handleAboutForm, username }) {
     event.preventDefault();
     setLoading(true); // Set loading to true while submitting
     try {
-      const response = await axios.post('https://codeshrine.onrender.com/addAbout', {
+      const response = await axios.post('https://codoshrine.onrender.com/addAbout', {
         username: username,
         about: aboutMe
       });
