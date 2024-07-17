@@ -10,13 +10,13 @@ const initialBiweeklyDate = new Date('2024-07-20T20:00:00+05:30'); // 20th July 
 
 
 const getChefContests = async () => {
-// const response = await axios.get(`https://www.codechef.com/api/list/contests/all?sort_by=START&sorting_order=asc&offset=0&mode=all`);
+    // const response = await axios.get(`https://www.codechef.com/api/list/contests/all?sort_by=START&sorting_order=asc&offset=0&mode=all`);
     // const contests = response.data.future_contests;
     const contests = [
         {
             contest_code: 'START144',
             contest_name: 'Starters 144 ',
-            contest_start_date: '17 Jul 2024  23:00:00',
+            contest_start_date: '17 Jul 2024  23:50:00',
             contest_end_date: '24 Jul 2024  22:00:00',
             contest_start_date_iso: '2024-07-24T20:00:00+05:30',
             contest_end_date_iso: '2024-07-24T22:00:00+05:30',
@@ -25,14 +25,20 @@ const getChefContests = async () => {
         }
     ]
     // console.log('CodeChef contests:', contests);
-    const timeOfNextChefContest = new Date(contests[0].contest_start_date);
-    console.log(timeOfNextChefContest.toLocaleString());
-    console.log(Date.now());
-    const timeDifference = timeOfNextChefContest - Date.now();
-    console.log(timeDifference);
+    // Convert contest start date from IST to SGT
+    const timeOfNextChefContestIST = new Date(contests[0].contest_start_date_iso);
+    const timeDifferenceISTToSGT = 2.5 * 60 * 60 * 1000; // 2.5 hours in milliseconds
+    const timeOfNextChefContestSGT = new Date(timeOfNextChefContestIST.getTime() + timeDifferenceISTToSGT);
+
+    console.log('Contest start time in SGT:', timeOfNextChefContestSGT);
+    console.log('Current time in SGT:', new Date());
+
+    const timeDifference = timeOfNextChefContestSGT - Date.now();
+    console.log('Time difference:', timeDifference);
+
     if (timeDifference > minTime && timeDifference < maxTime) {
         console.log(true);
-    }else{
+    } else {
         console.log(false);
     }
 
