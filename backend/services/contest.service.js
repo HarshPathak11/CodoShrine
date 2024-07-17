@@ -16,7 +16,7 @@ const getChefContests = async () => {
         {
             contest_code: 'START144',
             contest_name: 'Starters 144 ',
-            contest_start_date: '17 Jul 2024  22:00:00',
+            contest_start_date: '17 Jul 2024  23:00:00',
             contest_end_date: '24 Jul 2024  22:00:00',
             contest_start_date_iso: '2024-07-24T20:00:00+05:30',
             contest_end_date_iso: '2024-07-24T22:00:00+05:30',
@@ -31,6 +31,8 @@ const getChefContests = async () => {
     console.log(timeDifference);
     if (timeDifference > minTime && timeDifference < maxTime) {
         console.log(true);
+    }else{
+        console.log(false);
     }
 
     if (timeDifference >= minTime && timeDifference <= maxTime) {
