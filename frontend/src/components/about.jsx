@@ -19,13 +19,13 @@ function Developer() {
               <h3 className="text-xl font-semibold mb-2">Social Media</h3>
             </div>
             <div className="flex justify-around items-center">
-              <a href="https://www.linkedin.com/in/harsh-pathak-818163298/" className="text-blue-500 hover:text-blue-700">
+              <a href="https://www.linkedin.com/in/harsh-pathak-818163298/" target="_blank" className="text-blue-500 hover:text-blue-700" >
                 <FaLinkedin size={30} />
               </a>
-              <a href="https://github.com/HarshPathak11" className="text-gray-100 hover:text-gray-400">
+              <a href="https://github.com/HarshPathak11" target="_blank" className="text-gray-100 hover:text-gray-400">
                 <FaGithub size={30} />
               </a>
-              <a href="https://www.instagram.com/harshpathak_1110/" className="text-pink-500 hover:text-pink-700">
+              <a href="https://www.instagram.com/harshpathak_1110/" target="_blank" className="text-pink-500 hover:text-pink-700">
                 <FaInstagram size={30} />
               </a>
             </div>
@@ -53,13 +53,13 @@ function Developer() {
               <h3 className="text-xl font-semibold mb-2">Social Media</h3>
             </div>
             <div className="flex justify-around items-center">
-              <a href="https://www.linkedin.com/in/sumit-singh-developer/" className="text-blue-500 hover:text-blue-700">
+              <a href="https://www.linkedin.com/in/sumit-singh-developer/" target="_blank" className="text-blue-500 hover:text-blue-700">
                 <FaLinkedin size={30} />
               </a>
-              <a href="https://github.com/Rusty-98" className="text-gray-100 hover:text-gray-400">
+              <a href="https://github.com/Rusty-98" target="_blank" className="text-gray-100 hover:text-gray-400">
                 <FaGithub size={30} />
               </a>
-              <a href="https://www.instagram.com/rustygenius_98/" className="text-pink-500 hover:text-pink-700">
+              <a href="https://www.instagram.com/rustygenius_98/" target="_blank" className="text-pink-500 hover:text-pink-700">
                 <FaInstagram size={30} />
               </a>
             </div>

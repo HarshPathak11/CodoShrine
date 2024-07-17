@@ -230,7 +230,7 @@ const HomePage = () => {
               </p>
               <div className="mt-6">
                 <button className="" type="button">
-                  <span className='flex text-gray-300'><FaEnvelope className='m-1' />  codeshrine98@gmail.com</span>
+                  <a href="mailto:jkpathak83195@gmail.com" className='flex text-gray-300'><FaEnvelope className='m-1' />  codeshrine98@gmail.com</a>
                 </button>
                 {/* <button className="bg-white text-blue-500 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2" type="button">
                   <FaBell />
