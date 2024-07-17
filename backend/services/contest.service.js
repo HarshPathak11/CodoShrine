@@ -3,7 +3,7 @@ import sendEmailToAllUsers from './email.service.js';
 import { User } from '../model/user.model.js';
 
 const oneHourInMillis = 1 * 60 * 60 * 1000;
-const maxTime = 55 * 60 * 1000;
+const maxTime = 30 * 60 * 1000;
 const minTime = 25 * 60 * 1000; // minimum time difference to send the email
 
 const initialBiweeklyDate = new Date('2024-07-20T20:00:00+05:30'); // 20th July 2024, 8:00 PM IST
