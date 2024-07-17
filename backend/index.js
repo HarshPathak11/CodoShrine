@@ -29,6 +29,11 @@ app.post("/getAbout", getAbout);
 app.post("/addlinks", addLinks)
 app.post("/getLinks", getLinks);
 app.post("/getUser", getUser);
+
+app.get("/", (req, res) => {
+    res.send("Server is running")
+})
+
 app.listen(8000, () => {
     console.log('server running on http://localhost:8000')
     // scheduling the job for fetching 
