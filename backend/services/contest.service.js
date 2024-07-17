@@ -27,6 +27,7 @@ const getChefContests = async () => {
     // console.log('CodeChef contests:', contests);
     const timeOfNextChefContest = new Date(contests[0].contest_start_date);
     console.log(timeOfNextChefContest.toLocaleString());
+    console.log(Date.now());
     const timeDifference = timeOfNextChefContest - Date.now();
     console.log(timeDifference);
     if (timeDifference > minTime && timeDifference < maxTime) {
