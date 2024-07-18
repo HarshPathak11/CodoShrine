@@ -27,7 +27,7 @@ const getChefContests = async () => {
         }
     ]
 
-    const timeOfNextChefContest = new Date('18 Jul 2024 10:00:00');
+    const timeOfNextChefContest = new Date('18 Jul 2024 17:10:00');
     let timeInMilliseconds = timeOfNextChefContest.getTime();
     timeInMilliseconds -= 19800000;
     console.log("Time of next contest in milliseconds:", timeInMilliseconds);
