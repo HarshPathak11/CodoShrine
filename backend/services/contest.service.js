@@ -28,22 +28,24 @@ const getChefContests = async () => {
     ]
 
     const timeOfNextChefContest = new Date('18 Jul 2024 17:00:00');
-    const timeInMilliseconds = timeOfNextChefContest.getTime();
+    let timeInMilliseconds = timeOfNextChefContest.getTime();
+    timeInMilliseconds += 2 * 60 * 60 * 1000 + 30 * 60 * 1000;
     console.log("Time of next contest in milliseconds:", timeInMilliseconds);
 
-    const nowIst = Date.now();
-    const nowSgt = Date.now() + 8 * 60 * 60 * 1000;
 
-    const difference = timeInMilliseconds - nowIst;
-    const difference2 = timeInMilliseconds - nowSgt;
+    const nowSgt = Date.now();
+    const nowUtc = Date.now() - 8 * 60 * 60 * 1000;
+    const difference = timeInMilliseconds - nowSgt;
+    const difference2 = timeInMilliseconds - nowUtc;
+
 
     const differenceInMinutes = difference / (1000 * 60);
     const difference2InMinutes = difference2 / (1000 * 60);
 
-    console.log("Difference in milliseconds (IST):", difference);
-    console.log("Difference in minutes (IST):", differenceInMinutes);
-    console.log("Difference in milliseconds (SGT):", difference2);
-    console.log("Difference in minutes (SGT):", difference2InMinutes);
+    console.log("Difference in milliseconds:", difference);
+    console.log("Difference in minutes:", differenceInMinutes);
+    console.log("Difference2 in milliseconds:", difference2);
+    console.log("Difference2 in minutes:", difference2InMinutes);
 
     // console.log('CodeChef contests:', contests);
     // const timeOfNextChefContest = new Date(contests[0].contest_start_date);
