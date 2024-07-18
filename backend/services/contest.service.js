@@ -28,8 +28,8 @@ const getChefContests = async () => {
             "contest_name": "Starters 145 ",
             "contest_start_date": "31 Jul 2024  20:00:00",
             "contest_end_date": "31 Jul 2024  22:00:00",
-            "contest_start_date_iso": "2024-07-24T20:00:00+05:30",
-            "contest_end_date_iso": "2024-07-24T22:00:00+05:30",
+            "contest_start_date_iso": "2024-07-31T20:00:00+05:30",
+            "contest_end_date_iso": "2024-07-31T22:00:00+05:30",
             "contest_duration": "120",
             "distinct_users": 0
         }
@@ -38,14 +38,14 @@ const getChefContests = async () => {
     const timeOfNextChefContest = new Date(contests[0].contest_start_date);
     let timeInMilliseconds = timeOfNextChefContest.getTime();
     timeInMilliseconds -= 19800000;
-    console.log("Time of next contest in milliseconds:", timeInMilliseconds);
+    // console.log("Time of next contest in milliseconds:", timeInMilliseconds);
 
     const timeToBeSub = Date.now();
     const difference = timeInMilliseconds - timeToBeSub;
 
     if (difference > minTime && difference < maxTime) {
-        console.log(true);
-        console.log("Sending mail");
+        // console.log(true);
+        // console.log("Sending mail");
 
         const message = `The ${contests[0].contest_name} contest on CodeChef starts within the next hour. Good luck!`;
         const users = await User.find({ "platformProfiles.codechef.isId": true });
@@ -84,8 +84,8 @@ const getNextBiweeklyAt8PMIST = (startDate) => {
 
 const getLeetContest = async () => {
     try {
-        // const nextSundayAt8AMIST = getNextSundayAt8AMIST();
-        const nextSundayAt8AMIST = "2024-07-19T00:10:00.000Z";
+        const nextSundayAt8AMIST = getNextSundayAt8AMIST();
+        // const nextSundayAt8AMIST = "2024-07-19T00:10:00.000Z";
         const formattedSundayDate = nextSundayAt8AMIST.toLocaleString('en-GB', {
             day: '2-digit',
             month: 'short',
@@ -96,7 +96,7 @@ const getLeetContest = async () => {
             hour12: false,
             timeZone: 'Asia/Kolkata'
         }).replace(',', '');
-        console.log("sunday time of leetcode", formattedSundayDate);
+        // console.log("sunday time of leetcode", formattedSundayDate);
 
         const timeOfNextWeekly = new Date(formattedSundayDate);
         let timeInMilliseconds = timeOfNextWeekly.getTime();
@@ -108,14 +108,14 @@ const getLeetContest = async () => {
 
         // // Difference in minutes
         const differenceInMinutes = difference / (1000 * 60);
-        console.log("Difference in milliseconds:", difference);
-        console.log("Difference in minutes:", differenceInMinutes);
+        // console.log("Difference in milliseconds:", difference);
+        // console.log("Difference in minutes:", differenceInMinutes);
 
         if (difference > minTime && difference < maxTime) {
-            console.log(true);
-            console.log("sending mail")
+            // console.log(true);
+            // console.log("sending mail")
         } else {
-            console.log(false);
+            // console.log(false);
         }
 
         if (difference >= minTime && difference <= maxTime) {
@@ -138,7 +138,7 @@ const getLeetContest = async () => {
             hour12: false,
             timeZone: 'Asia/Kolkata'
         }).replace(',', '');
-        console.log("saturday time of leetcode", formattedSaturdayDate);
+        // console.log("saturday time of leetcode", formattedSaturdayDate);
 
         const timeOfNextBiweekly = new Date(formattedSaturdayDate);
         let timeInMillisecondsBi = timeOfNextBiweekly.getTime();
@@ -149,14 +149,14 @@ const getLeetContest = async () => {
 
         // // Difference in minutes
         const differenceInMinutesBi = differenceBi / (1000 * 60);
-        console.log("Difference Bi in milliseconds:", differenceBi);
-        console.log("Difference Bi in minutes:", differenceInMinutesBi);
+        // console.log("Difference Bi in milliseconds:", differenceBi);
+        // console.log("Difference Bi in minutes:", differenceInMinutesBi);
 
         if (differenceBi > minTime && differenceBi < maxTime) {
-            console.log(true, " Bi");
-            console.log("sending mail")
+            // console.log(true, " Bi");
+            // console.log("sending mail")
         } else {
-            console.log(false, " Bi");
+            // console.log(false, " Bi");
         }
 
         if (differenceBi >= minTime && differenceBi <= maxTime) {
