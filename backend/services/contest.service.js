@@ -10,29 +10,52 @@ const initialBiweeklyDate = new Date('2024-07-20T20:00:00+05:30'); // 20th July 
 
 
 const getChefContests = async () => {
-    const response = await axios.get(`https://www.codechef.com/api/list/contests/all?sort_by=START&sorting_order=asc&offset=0&mode=all`);
-    const contests = response.data.future_contests;
-    console.log('CodeChef contests:', contests);
+    // const response = await axios.get(`https://www.codechef.com/api/list/contests/all?sort_by=START&sorting_order=asc&offset=0&mode=all`);
+    // const contests = response.data.future_contests;
+    // console.log('CodeChef contests:', contests);
 
-    // const contests = [
-    //     {
-    //         contest_code: 'START144',
-    //         contest_name: 'Starters 144 ',
-    //         contest_start_date: '17 Jul 2024  23:00:00',
-    //         contest_end_date: '24 Jul 2024  22:00:00',
-    //         contest_start_date_iso: '2024-07-24T20:00:00+05:30',
-    //         contest_end_date_iso: '2024-07-24T22:00:00+05:30',
-    //         contest_duration: '120',
-    //         distinct_users: 0
-    //     }
-    // ]
+    const contests = [
+        {
+            contest_code: 'START144',
+            contest_name: 'Starters 144 ',
+            contest_start_date: '18 Jul 2024  9:00:00',
+            contest_end_date: '24 Jul 2024  22:00:00',
+            contest_start_date_iso: '2024-07-24T20:00:00+05:30',
+            contest_end_date_iso: '2024-07-24T22:00:00+05:30',
+            contest_duration: '120',
+            distinct_users: 0
+        }
+    ]
+
+    const timeOfNextChefContest = new Date('18 Jul 2024 17:00:00');
+    const timeInMilliseconds = timeOfNextChefContest.getTime();
+    console.log("Time of next contest in milliseconds:", timeInMilliseconds);
+
+    const nowIst = Date.now();
+    const nowSgt = Date.now() + 8 * 60 * 60 * 1000;
+
+    const difference = timeInMilliseconds - nowIst;
+    const difference2 = timeInMilliseconds - nowSgt;
+
+    const differenceInMinutes = difference / (1000 * 60);
+    const difference2InMinutes = difference2 / (1000 * 60);
+
+    console.log("Difference in milliseconds (IST):", difference);
+    console.log("Difference in minutes (IST):", differenceInMinutes);
+    console.log("Difference in milliseconds (SGT):", difference2);
+    console.log("Difference in minutes (SGT):", difference2InMinutes);
+
     // console.log('CodeChef contests:', contests);
     // const timeOfNextChefContest = new Date(contests[0].contest_start_date);
+    // console.log("time of next contest", timeOfNextChefContest);
+    // const toBeSub = Date.now() - (2.5 * 60 * 60 * 1000);
+    // console.log("to be sub : ", toBeSub);
     // console.log(timeOfNextChefContest.toLocaleString());
-    // const timeDifference = timeOfNextChefContest - Date.now();
+    // const timeDifference = timeOfNextChefContest - toBeSub;
     // console.log(timeDifference);
     // if (timeDifference > minTime && timeDifference < maxTime) {
     //     console.log(true);
+    //     console.log("sending mail")
     // } else {
     //     console.log(false);
     // }
