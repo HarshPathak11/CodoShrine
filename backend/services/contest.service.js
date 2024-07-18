@@ -10,9 +10,30 @@ const initialBiweeklyDate = new Date('2024-07-20T20:00:00+05:30'); // 20th July 
 
 
 const getChefContests = async () => {
-    const response = await axios.get(`https://www.codechef.com/api/list/contests/all?sort_by=START&sorting_order=asc&offset=0&mode=all`);
-    const contests = response.data.future_contests;
-    console.log('CodeChef contests:', contests);
+    // const response = await axios.get(`https://www.codechef.com/api/list/contests/all?sort_by=START&sorting_order=asc&offset=0&mode=all`);
+    // console.log('CodeChef contests:', JSON.stringify(contests, null, 2));
+    const contests = [
+        {
+            "contest_code": "START144D",
+            "contest_name": "Starters 144 ",
+            "contest_start_date": "24 Jul 2024  20:00:00",
+            "contest_end_date": "24 Jul 2024  22:00:00",
+            "contest_start_date_iso": "2024-07-24T20:00:00+05:30",
+            "contest_end_date_iso": "2024-07-24T22:00:00+05:30",
+            "contest_duration": "120",
+            "distinct_users": 0
+        },
+        {
+            "contest_code": "START145D",
+            "contest_name": "Starters 145 ",
+            "contest_start_date": "31 Jul 2024  20:00:00",
+            "contest_end_date": "31 Jul 2024  22:00:00",
+            "contest_start_date_iso": "2024-07-24T20:00:00+05:30",
+            "contest_end_date_iso": "2024-07-24T22:00:00+05:30",
+            "contest_duration": "120",
+            "distinct_users": 0
+        }
+    ]
 
     const timeOfNextChefContest = new Date(contests[0].contest_start_date);
     let timeInMilliseconds = timeOfNextChefContest.getTime();
