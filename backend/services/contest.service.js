@@ -73,7 +73,7 @@ const getNextBiweeklyAt8PMIST = (startDate) => {
 const getLeetContest = async () => {
     try {
         // const nextSundayAt8AMIST = getNextSundayAt8AMIST();
-        const nextSundayAt8AMIST = "2024-07-18T15:30:00.000Z";
+        const nextSundayAt8AMIST = "2024-07-18T16:00:00.000Z";
         const formattedSundayDate = nextSundayAt8AMIST.toLocaleString('en-GB', {
             day: '2-digit',
             month: 'short',
@@ -128,7 +128,7 @@ const getLeetContest = async () => {
         }).replace(',', '');
         console.log("saturday time of leetcode", formattedSaturdayDate);
 
-        const timeOfNextBiweekly = new Date(formattedSundayDate);
+        const timeOfNextBiweekly = new Date(formattedSaturdayDate);
         let timeInMillisecondsBi = timeOfNextBiweekly.getTime();
         timeInMillisecondsBi -= 19800000;
         // console.log("Time of next Weekly in milliseconds:", timeInMilliseconds);
