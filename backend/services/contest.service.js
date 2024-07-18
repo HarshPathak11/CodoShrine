@@ -10,39 +10,30 @@ const initialBiweeklyDate = new Date('2024-07-20T20:00:00+05:30'); // 20th July 
 
 
 const getChefContests = async () => {
-    // const response = await axios.get(`https://www.codechef.com/api/list/contests/all?sort_by=START&sorting_order=asc&offset=0&mode=all`);
-    // const contests = response.data.future_contests;
-    // // console.log('CodeChef contests:', contests);
+    const response = await axios.get(`https://www.codechef.com/api/list/contests/all?sort_by=START&sorting_order=asc&offset=0&mode=all`);
+    const contests = response.data.future_contests;
+    console.log('CodeChef contests:', contests);
 
-    // const timeOfNextChefContest = new Date(contests[0].contest_start_date);
-    // let timeInMilliseconds = timeOfNextChefContest.getTime();
-    // timeInMilliseconds -= 19800000;
-    // console.log("Time of next contest in milliseconds:", timeInMilliseconds);
+    const timeOfNextChefContest = new Date(contests[0].contest_start_date);
+    let timeInMilliseconds = timeOfNextChefContest.getTime();
+    timeInMilliseconds -= 19800000;
+    console.log("Time of next contest in milliseconds:", timeInMilliseconds);
 
-    // const timeToBeSub = Date.now();
-    // const difference = timeInMilliseconds - timeToBeSub;
+    const timeToBeSub = Date.now();
+    const difference = timeInMilliseconds - timeToBeSub;
 
-    // // Difference in minutes
-    // // const differenceInMinutes = difference / (1000 * 60);
-    // // console.log("Difference in milliseconds:", difference);
-    // // console.log("Difference in minutes:", differenceInMinutes);
+    if (difference > minTime && difference < maxTime) {
+        console.log(true);
+        console.log("Sending mail");
 
-    // if (difference > minTime && difference < maxTime) {
-    //     console.log(true);
-    //     console.log("sending mail")
-    // } else {
-    //     // console.log(false);
-    // }
+        const message = `The ${contests[0].contest_name} contest on CodeChef starts within the next hour. Good luck!`;
+        const users = await User.find({ "platformProfiles.codechef.isId": true });
+        await sendEmailToAllUsers(message, users);
+    } else {
+        console.log('No CodeChef contests starting within the next hour.');
+    }
 
-    // if (difference >= minTime && difference <= maxTime) {
-    //     const message = `The ${contests[0].contest_name} contest on CodeChef starts within the next hour. Good luck!`;
-    //     const users = await User.find({ "platformProfiles.codechef.isId": true });
-    //     await sendEmailToAllUsers(message, users);
-    // } else {
-    //     console.log('No CodeChef contests starting within the next hour.');
-    // }
-
-    // return contests;
+    return contests;
 };
 
 const getNextSundayAt8AMIST = () => {
