@@ -2,7 +2,7 @@ import axios from 'axios';
 import sendEmailToAllUsers from './email.service.js';
 import { User } from '../model/user.model.js';
 
-const oneHourInMillis = 1 * 60 * 60 * 1000;
+// const maxTime = 1 * 60 * 60 * 1000;
 const maxTime = 10 * 60 * 1000;
 const minTime = 5 * 60 * 1000; // minimum time difference to send the email
 
@@ -12,52 +12,37 @@ const initialBiweeklyDate = new Date('2024-07-20T20:00:00+05:30'); // 20th July 
 const getChefContests = async () => {
     // const response = await axios.get(`https://www.codechef.com/api/list/contests/all?sort_by=START&sorting_order=asc&offset=0&mode=all`);
     // const contests = response.data.future_contests;
-    // console.log('CodeChef contests:', contests);
-
-    const contests = [
-        {
-            contest_code: 'START144',
-            contest_name: 'Starters 144 ',
-            contest_start_date: '18 Jul 2024  17:50:00',
-            contest_end_date: '24 Jul 2024  22:00:00',
-            contest_start_date_iso: '2024-07-24T20:00:00+05:30',
-            contest_end_date_iso: '2024-07-24T22:00:00+05:30',
-            contest_duration: '120',
-            distinct_users: 0
-        }
-    ]
-
-    const timeOfNextChefContest = new Date('18 Jul 2024 18:10:00');
-    let timeInMilliseconds = timeOfNextChefContest.getTime();
-    timeInMilliseconds -= 19800000;
-    console.log("Time of next contest in milliseconds:", timeInMilliseconds);
-
-    const timeToBeSub = Date.now();
-    const difference = timeInMilliseconds - timeToBeSub;
-
-    // Difference in minutes
-    // const differenceInMinutes = difference / (1000 * 60);
-    // console.log("Difference in milliseconds:", difference);
-    // console.log("Difference in minutes:", differenceInMinutes);
+    // // console.log('CodeChef contests:', contests);
 
     // const timeOfNextChefContest = new Date(contests[0].contest_start_date);
-    if (difference > minTime && difference < maxTime) {
-        console.log(true);
-        console.log("sending mail")
-    } else {
-        console.log(false);
-    }
+    // let timeInMilliseconds = timeOfNextChefContest.getTime();
+    // timeInMilliseconds -= 19800000;
+    // console.log("Time of next contest in milliseconds:", timeInMilliseconds);
 
-    if (difference >= minTime && difference <= maxTime) {
-        // const message = `The ${contests[0].contest_name} contest on CodeChef starts within the next hour. Good luck!`;
-        const message = `testing sorry for bothering you!`;
-        const users = await User.find({ "platformProfiles.codechef.isId": true });
-        await sendEmailToAllUsers(message, users);
-    } else {
-        console.log('No CodeChef contests starting within the next hour.');
-    }
+    // const timeToBeSub = Date.now();
+    // const difference = timeInMilliseconds - timeToBeSub;
 
-    return contests;
+    // // Difference in minutes
+    // // const differenceInMinutes = difference / (1000 * 60);
+    // // console.log("Difference in milliseconds:", difference);
+    // // console.log("Difference in minutes:", differenceInMinutes);
+
+    // if (difference > minTime && difference < maxTime) {
+    //     console.log(true);
+    //     console.log("sending mail")
+    // } else {
+    //     // console.log(false);
+    // }
+
+    // if (difference >= minTime && difference <= maxTime) {
+    //     const message = `The ${contests[0].contest_name} contest on CodeChef starts within the next hour. Good luck!`;
+    //     const users = await User.find({ "platformProfiles.codechef.isId": true });
+    //     await sendEmailToAllUsers(message, users);
+    // } else {
+    //     console.log('No CodeChef contests starting within the next hour.');
+    // }
+
+    // return contests;
 };
 
 const getNextSundayAt8AMIST = () => {
@@ -87,21 +72,82 @@ const getNextBiweeklyAt8PMIST = (startDate) => {
 
 const getLeetContest = async () => {
     try {
-        const nextSundayAt8AMIST = getNextSundayAt8AMIST();
-        const nextBiweeklyAt8PMIST = getNextBiweeklyAt8PMIST(initialBiweeklyDate);
+        // const nextSundayAt8AMIST = getNextSundayAt8AMIST();
+        const nextSundayAt8AMIST = "2024-07-18T15:30:00.000Z";
+        const formattedSundayDate = nextSundayAt8AMIST.toLocaleString('en-GB', {
+            day: '2-digit',
+            month: 'short',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false,
+            timeZone: 'Asia/Kolkata'
+        }).replace(',', '');
+        console.log("sunday time of leetcode", formattedSundayDate);
 
-        const weeklyTimeDifference = nextSundayAt8AMIST - Date.now();
-        const biweeklyTimeDifference = nextBiweeklyAt8PMIST - Date.now();
+        const timeOfNextWeekly = new Date(formattedSundayDate);
+        let timeInMilliseconds = timeOfNextWeekly.getTime();
+        timeInMilliseconds -= 19800000;
+        // console.log("Time of next Weekly in milliseconds:", timeInMilliseconds);
 
-        if (weeklyTimeDifference > maxTime && weeklyTimeDifference < oneHourInMillis) {
-            const message = `The Weekly contest on LeetCode starts within the next hour. Good luck!`;
+        const timeToBeSub = Date.now();
+        const difference = timeInMilliseconds - timeToBeSub;
+
+        // // Difference in minutes
+        const differenceInMinutes = difference / (1000 * 60);
+        console.log("Difference in milliseconds:", difference);
+        console.log("Difference in minutes:", differenceInMinutes);
+
+        if (difference > minTime && difference < maxTime) {
+            console.log(true);
+            console.log("sending mail")
+        } else {
+            console.log(false);
+        }
+
+        if (difference >= minTime && difference <= maxTime) {
+            // const message = `The Weekly contest on LeetCode starts within the next hour. Good luck!`;
+            const message = `The Weekly contest on LeetCode Testing`;
             const users = await User.find({ "platformProfiles.leetcode.isId": true });
             await sendEmailToAllUsers(message, users);
         } else {
             console.log('No LeetCode weekly contests starting within the next hour.');
         }
 
-        if (biweeklyTimeDifference > maxTime && biweeklyTimeDifference < oneHourInMillis) {
+        const nextBiweeklyAt8PMIST = getNextBiweeklyAt8PMIST(initialBiweeklyDate);
+        const formattedSaturdayDate = nextBiweeklyAt8PMIST.toLocaleString('en-GB', {
+            day: '2-digit',
+            month: 'short',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false,
+            timeZone: 'Asia/Kolkata'
+        }).replace(',', '');
+        console.log("saturday time of leetcode", formattedSaturdayDate);
+
+        const timeOfNextBiweekly = new Date(formattedSundayDate);
+        let timeInMillisecondsBi = timeOfNextBiweekly.getTime();
+        timeInMillisecondsBi -= 19800000;
+        // console.log("Time of next Weekly in milliseconds:", timeInMilliseconds);
+
+        const differenceBi = timeInMillisecondsBi - timeToBeSub;
+
+        // // Difference in minutes
+        const differenceInMinutesBi = differenceBi / (1000 * 60);
+        console.log("Difference Bi in milliseconds:", differenceBi);
+        console.log("Difference Bi in minutes:", differenceInMinutesBi);
+
+        if (differenceBi > minTime && differenceBi < maxTime) {
+            console.log(true, " Bi");
+            console.log("sending mail")
+        } else {
+            console.log(false, " Bi");
+        }
+
+        if (differenceBi >= minTime && differenceBi <= maxTime) {
             const message = `The Biweekly contest on LeetCode starts within the next hour. Good luck!`;
             const users = await User.find({ "platformProfiles.leetcode.isId": true });
             await sendEmailToAllUsers(message, users);
