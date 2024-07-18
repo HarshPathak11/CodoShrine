@@ -3,8 +3,8 @@ import sendEmailToAllUsers from './email.service.js';
 import { User } from '../model/user.model.js';
 
 const oneHourInMillis = 1 * 60 * 60 * 1000;
-const maxTime = 35 * 60 * 1000;
-const minTime = 30 * 60 * 1000; // minimum time difference to send the email
+const maxTime = 10 * 60 * 1000;
+const minTime = 5 * 60 * 1000; // minimum time difference to send the email
 
 const initialBiweeklyDate = new Date('2024-07-20T20:00:00+05:30'); // 20th July 2024, 8:00 PM IST
 
@@ -27,7 +27,7 @@ const getChefContests = async () => {
         }
     ]
 
-    const timeOfNextChefContest = new Date('18 Jul 2024 18:00:00');
+    const timeOfNextChefContest = new Date('18 Jul 2024 10:00:00');
     let timeInMilliseconds = timeOfNextChefContest.getTime();
     timeInMilliseconds -= 19800000;
     console.log("Time of next contest in milliseconds:", timeInMilliseconds);
