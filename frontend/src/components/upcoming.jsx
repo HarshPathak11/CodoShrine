@@ -11,7 +11,7 @@ const UpcomingContestPage = () => {
       const response = await fetch('https://codoshrine.onrender.com/getContestsList', {
         method: 'GET',
         headers: {
-          'Content-Type': 'application/json' // Specify the content type as JSON
+          'Content-Type': 'application/json'
         }
       });
       if (response.ok) {
@@ -20,7 +20,7 @@ const UpcomingContestPage = () => {
           const list = [];
 
           // Process CodeChef contests
-          data.codechef.forEach(contest => {
+          data.codechef?.forEach(contest => {
             const startDate = new Date(contest.contest_start_date_iso);
             startDate.setHours(startDate.getHours() + 5);
             startDate.setMinutes(startDate.getMinutes() + 30);
@@ -36,7 +36,7 @@ const UpcomingContestPage = () => {
           });
 
           // Process LeetCode contests
-          data.leetcode.forEach(contest => {
+          data.leetcode?.forEach(contest => {
             const startDate = new Date(contest.contest_start_date);
 
             // Add 5 hours and 30 minutes to startDate
@@ -76,6 +76,8 @@ const UpcomingContestPage = () => {
         const contests = transformContestData(data);
         // console.log(contests);
         setContestList(contests);
+      }else{
+        console.log("we are fucked up")
       }
     }
 
