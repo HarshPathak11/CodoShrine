@@ -29,12 +29,14 @@ const getChefContests = async () => {
 
     const timeOfNextChefContest = new Date('18 Jul 2024 17:00:00');
     let timeInMilliseconds = timeOfNextChefContest.getTime();
-    timeInMilliseconds += 2 * 60 * 60 * 1000 + 30 * 60 * 1000;
+    // timeInMilliseconds += 2 * 60 * 60 * 1000 + 30 * 60 * 1000;
     console.log("Time of next contest in milliseconds:", timeInMilliseconds);
 
 
     const nowSgt = Date.now();
+    console.log(nowSgt);
     const nowUtc = Date.now() - 8 * 60 * 60 * 1000;
+    console.log(nowUtc);
     const difference = timeInMilliseconds - nowSgt;
     const difference2 = timeInMilliseconds - nowUtc;
 
