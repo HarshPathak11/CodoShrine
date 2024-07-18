@@ -85,7 +85,7 @@ const getNextBiweeklyAt8PMIST = (startDate) => {
 const getLeetContest = async () => {
     try {
         // const nextSundayAt8AMIST = getNextSundayAt8AMIST();
-        const nextSundayAt8AMIST = "2024-07-18T16:00:00.000Z";
+        const nextSundayAt8AMIST = "2024-07-19T00:10:00.000Z";
         const formattedSundayDate = nextSundayAt8AMIST.toLocaleString('en-GB', {
             day: '2-digit',
             month: 'short',
