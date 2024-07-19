@@ -119,7 +119,7 @@ const UpcomingContestPage = () => {
         {contestList.length !== 0 && <Table contests={contestList} searchTerm={searchTerm} selectedPlatform={selectedPlatform} />}
       </div>
       <h1 className='md:hidden text-center flex items-center justify-center gap-3'>Swipe left on table to see info
-        <video src="\src\media\svg2.mp4" autoPlay muted loop className='w-10 h-10'></video>
+        <video src="/media/svg2.mp4" autoPlay muted loop className='w-10 h-10'></video>
       </h1>
     </div>
   );
