@@ -3,8 +3,8 @@ import sendEmailToAllUsers from './email.service.js';
 import { User } from '../model/user.model.js';
 
 // const maxTime = 1 * 60 * 60 * 1000;
-const maxTime = 10 * 60 * 1000;
-const minTime = 5 * 60 * 1000; // minimum time difference to send the email
+const maxTime = 60 * 60 * 1000;
+const minTime = 55 * 60 * 1000; // minimum time difference to send the email
 
 const initialBiweeklyDate = new Date('2024-07-20T20:00:00+05:30'); // 20th July 2024, 8:00 PM IST
 
@@ -119,8 +119,7 @@ const getLeetContest = async () => {
         }
 
         if (difference >= minTime && difference <= maxTime) {
-            // const message = `The Weekly contest on LeetCode starts within the next hour. Good luck!`;
-            const message = `The Weekly contest on LeetCode Testing`;
+            const message = `The Weekly contest on LeetCode starts within the next hour. Good luck!`;
             const users = await User.find({ "platformProfiles.leetcode.isId": true });
             await sendEmailToAllUsers(message, users);
         } else {
