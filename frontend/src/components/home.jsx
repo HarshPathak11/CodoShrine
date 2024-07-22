@@ -25,7 +25,7 @@ const HomePage = () => {
                   <p className="m-4 text-lg text-gray-300 text-pretty">
                     With the increasing popularity of Competitive Programming, it's easy to lose track of upcoming coding contests and challenges across various platforms. Missing out on valuable contests can be frustrating. But worry no more! With CodeShrine, you can effortlessly keep track of all your contest profiles in one place and never miss another competition.
 
-                    Simply sign up with an active email to start receiving reminders for upcoming contests. CodeShrine is your one-stop platform to monitor and showcase your coding progress. Stay on top of your game and ensure you never miss an opportunity to compete and improve.
+                    Simply sign up with an active email, and add your coding platform profiles to start receiving reminders of the upcoming contests for the particular platform . CodeShrine is your one-stop platform to monitor and showcase your coding progress. Stay on top of your game and ensure you never miss an opportunity to compete and improve.
                   </p></div>
                 <Link to="/register"><button className="mt-4 bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700">
                   Sign Up Now
