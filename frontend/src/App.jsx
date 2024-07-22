@@ -313,15 +313,15 @@ function App() {
             <Link to="/cal">
               <a href="#" className="block text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-medium">Upcoming Contests</a>
             </Link>
-            <Link to="/login">
+{/*             <Link to="/login">
               <a href="#" className="block text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-medium">Profile</a>
-            </Link>
+            </Link> */}
             <Link to="/about">
               <a href="#" className="block text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-medium">About</a>
             </Link>
-            <Link to="/login">
+{/*             <Link to="/login">
               <a href="#" className="block text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-medium">Login/Signup</a>
-            </Link>
+            </Link> */}
           </div>
         )}
       </nav>
