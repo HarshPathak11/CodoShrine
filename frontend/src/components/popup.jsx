@@ -10,7 +10,7 @@ const Modal = ({ addProfile, cancelModal }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-gray-900 bg-opacity-75 flex justify-center items-center">
+    <div className="fixed inset-0 z-10 bg-gray-900 bg-opacity-75 flex justify-center items-center">
       <div className="bg-gray-800 p-6 rounded-lg shadow-lg max-w-md w-full space-y-6">
         <h2 className="text-2xl font-bold text-center text-white">Add Profile</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
