@@ -17,7 +17,7 @@ const getRecentContests = async (req, res) => {
         if (user[0].platformProfiles.codechef && user[0].platformProfiles.codechef.isId) {
             const platUserID = user[0].platformProfiles.codechef.platid;
             console.log(platUserID);
-            const response = await axios.get(`https://codechef-api.vercel.app/${platUserID}`);
+            const response = await axios.get(`https://codechef-api.vercel.app/handle/${platUserID}`);
             const responseArr = response.data.ratingData;
             const length = responseArr.length;
             const correctArr = responseArr.slice(length - 5, length);
