@@ -41,7 +41,7 @@ function Developer() {
         </div>
 
 
-        <div className="max-w-xl w-full bg-gray-800 text-white rounded-lg shadow-lg p-6 space-y-6 h-fit md:mr-auto md:ml-1 mt-20 ">
+        <div className="max-w-xl w-full bg-gray-800 text-white rounded-lg shadow-lg p-6 space-y-6 h-fit md:mr-auto md:ml-1 md:mt-20 ">
           <div className="text-center">
             <h2 className="text-2xl font-bold">Sumit Singh</h2>
             <p className="text-gray-400">
@@ -69,7 +69,7 @@ function Developer() {
               <h3 className="text-xl font-semibold mb-2">About Me</h3>
             </div>
             <p className="text-gray-400">
-              Hi, I'm Sumit! Please use this platform and share your valuable feedback, whether you have positive experiences, suggestions, or bug reports. We're eager to hear your insights!. 
+              Hi, I'm Sumit! Please use this platform and share your valuable feedback, whether you have positive experiences, suggestions, or bug reports. We're eager to hear your insights!.
             </p>
           </div>
         </div>
