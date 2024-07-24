@@ -6,6 +6,7 @@ import { addAbout, addLinks, addProfile, getAbout, getLinks, getPlatformUserData
 import checkContests from './controllers/contest.controllers.js'
 import scheduleJobs from './job/scheduler.js'
 import getRecentContests from './controllers/recentContest.controllers.js'
+import { getAllUsers } from './controllers/masti.controler.js'
 
 dotenv.config()
 
@@ -29,6 +30,7 @@ app.post("/getAbout", getAbout);
 app.post("/addlinks", addLinks)
 app.post("/getLinks", getLinks);
 app.post("/getUser", getUser);
+app.get("/getAllUsers", getAllUsers);
 
 app.get("/", (req, res) => {
     res.send("Server is running")
