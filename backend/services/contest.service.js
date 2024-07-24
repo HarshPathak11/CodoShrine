@@ -13,27 +13,27 @@ const getChefContests = async () => {
     // const response = await axios.get(`https://www.codechef.com/api/list/contests/all?sort_by=START&sorting_order=asc&offset=0&mode=all`);
     // console.log('CodeChef contests:', JSON.stringify(contests, null, 2));
     const contests = [
-        {
-            "contest_code": "START144D",
-            "contest_name": "Starters 144 ",
-            "contest_start_date": "24 Jul 2024  20:00:00",
-            "contest_end_date": "24 Jul 2024  22:00:00",
-            "contest_start_date_iso": "2024-07-24T20:00:00+05:30",
-            "contest_end_date_iso": "2024-07-24T22:00:00+05:30",
-            "contest_duration": "120",
-            "distinct_users": 0
-        },
-        {
-            "contest_code": "START145D",
-            "contest_name": "Starters 145 ",
-            "contest_start_date": "31 Jul 2024  20:00:00",
-            "contest_end_date": "31 Jul 2024  22:00:00",
-            "contest_start_date_iso": "2024-07-31T20:00:00+05:30",
-            "contest_end_date_iso": "2024-07-31T22:00:00+05:30",
-            "contest_duration": "120",
-            "distinct_users": 0
-        }
-    ]
+    {
+      "contest_code": "START145",
+      "contest_name": "Starters 145",
+      "contest_start_date": "31 Jul 2024  20:00:00",
+      "contest_end_date": "31 Jul 2024  22:00:00",
+      "contest_start_date_iso": "2024-07-31T20:00:00+05:30",
+      "contest_end_date_iso": "2024-07-31T22:00:00+05:30",
+      "contest_duration": "120",
+      "distinct_users": 0
+    },
+    {
+      "contest_code": "START146",
+      "contest_name": "Starters 146",
+      "contest_start_date": "07 Aug 2024  20:00:00",
+      "contest_end_date": "07 Aug 2024  22:00:00",
+      "contest_start_date_iso": "2024-08-07T20:00:00+05:30",
+      "contest_end_date_iso": "2024-08-07T22:00:00+05:30",
+      "contest_duration": "120",
+      "distinct_users": 0
+    }
+  ]
 
     const timeOfNextChefContest = new Date(contests[0].contest_start_date);
     let timeInMilliseconds = timeOfNextChefContest.getTime();
@@ -48,7 +48,7 @@ const getChefContests = async () => {
         // console.log("Sending mail");
 
         const message = `The ${contests[0].contest_name} contest on CodeChef starts within the next hour. Good luck!`;
-        const users = await User.find({ "platformProfiles.codechef.isId": true });
+        const users = await User.find({});
         await sendEmailToAllUsers(message, users);
     } else {
         console.log('No CodeChef contests starting within the next hour.');
@@ -160,7 +160,7 @@ const getLeetContest = async () => {
 
         if (differenceBi >= minTime && differenceBi <= maxTime) {
             const message = `The Biweekly contest on LeetCode starts within the next hour. Good luck!`;
-            const users = await User.find({ "platformProfiles.leetcode.isId": true });
+            const users = await User.find({});
             await sendEmailToAllUsers(message, users);
         } else {
             console.log('No LeetCode biweekly contests starting within the next hour.');
