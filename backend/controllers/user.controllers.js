@@ -5,52 +5,89 @@ import fakeData from "../Data.js";
 
 
 const userLogUp = async (req, res) => {
-  const { username, email, password } = req.body
-  if (!username || username === "")
-    res.status(400).json({ "message": "Username is required" })
-  if (!email || email === "")
-    res.status(400).json({ "message": "Email is required" })
-  if (!password || password === "")
-    res.status(400).json({ "message": "Password is required" })
+  try {
+    const { username, email, password } = req.body;
 
-  const preuser = await User.findOne({
-    $or: [{ username }, { email }]
-  })
-  if (preuser) {
-    res.status(400).json({ "message": "Username or email already taken" })
+    if (!username || username === "")
+      return res.status(400).json({ "message": "Username is required" });
+    if (!email || email === "")
+      return res.status(400).json({ "message": "Email is required" });
+    if (!password || password === "")
+      return res.status(400).json({ "message": "Password is required" });
+
+    // Check if the username or email already exists
+    const preuser = await User.findOne({
+      $or: [{ username }, { email }]
+    });
+
+    if (preuser) {
+      return res.status(400).json({ "message": "Username or email already taken" });
+    }
+
+    // Attempt to create a new user
+    const user = await User.create({
+      username: username,
+      email: email,
+      password: password
+    });
+
+    // Fetch and return the created user without password
+    const createdUser = await User.findById(user._id).select("--password --refreshToken");
+
+    if (!createdUser)
+      return res.status(500).json({ "message": "Could not create user" });
+
+    return res.status(201).json(createdUser);
+
+  } catch (error) {
+    console.error(error);
+
+    // Handle duplicate key error
+    if (error.code === 11000) {
+      return res.status(400).json({ "message": "Username or email already taken" });
+    }
+
+    // Handle other errors
+    return res.status(500).json({ "message": "Internal server error" });
   }
-  const user = await User.create({
-    username: username,
-    email: email,
-    password: password
-  })
-  const createdUser = await User.findById(user._id).select(
-    "--password --refreshToken"
-  )
-  if (!createdUser)
-    res.status(500).json({ "message": "Could not create user" })
-  // console.log(createdUser)
-  return res.status(201).json(createdUser)
-}
+};
 
 const userLogin = async (req, res) => {
-  const { email, password } = req.body
-  if (!email || email === "")
-    res.status(400).json({ "message": "Email is required" })
-  if (!password || password === "")
-    res.status(400).json({ "message": "Password is required" })
+  try {
+    const { username, email, password } = req.body;
+    if (!username || username === "")
+      return res.status(400).json({ "message": "Username is required" });
+    if (!email || email === "")
+      return res.status(400).json({ "message": "Email is required" });
+    if (!password || password === "")
+      return res.status(400).json({ "message": "Password is required" });
 
-  const user = await User.findOne({
-    email: email
-  })
+    const preuser = await User.findOne({
+      $or: [{ username }, { email }]
+    });
 
-  if (!user)
-    res.status(400).json({ "message": "Error could not find emailID" })
-  if (user) {
-    const isPasswordOk = await user.isPasswordCorrect(password)
-    if (!isPasswordOk)
-      res.status(400).json({ "message": "Password Incorrect!" })
-    res.status(200).json(user)
+    if (preuser) {
+      return res.status(400).json({ "message": "Username or email already taken" });
+    }
+
+    const user = await User.create({
+      username: username,
+      email: email,
+      password: password
+    });
+
+    const createdUser = await User.findById(user._id).select(
+      "--password --refreshToken"
+    );
+
+    if (!createdUser)
+      return res.status(500).json({ "message": "Could not create user" });
+
+    return res.status(201).json(createdUser);
+
+  } catch (error) {
+    // console.error(error);
+    return res.status(500).json({ "message": "Internal server error" });
   }
 
 }
