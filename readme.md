@@ -22,8 +22,8 @@
 
 ## Project Team
 
-- [**Sumit**(https://www.linkedin.com/in/sumit-singh-developer/)]
-- [**Harsh Pathak**(https://www.linkedin.com/in/harsh-pathak-818163298/)]
+- **Sumit**(https://www.linkedin.com/in/sumit-singh-developer/)
+- **Harsh Pathak**(https://www.linkedin.com/in/harsh-pathak-818163298/)
 
 ## How It Works
 
