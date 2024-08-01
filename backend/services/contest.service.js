@@ -13,27 +13,27 @@ const getChefContests = async () => {
     // const response = await axios.get(`https://www.codechef.com/api/list/contests/all?sort_by=START&sorting_order=asc&offset=0&mode=all`);
     // console.log('CodeChef contests:', JSON.stringify(contests, null, 2));
     const contests = [
-    {
-      "contest_code": "START145",
-      "contest_name": "Starters 145",
-      "contest_start_date": "31 Jul 2024  20:00:00",
-      "contest_end_date": "31 Jul 2024  22:00:00",
-      "contest_start_date_iso": "2024-07-31T20:00:00+05:30",
-      "contest_end_date_iso": "2024-07-31T22:00:00+05:30",
-      "contest_duration": "120",
-      "distinct_users": 0
-    },
-    {
-      "contest_code": "START146",
-      "contest_name": "Starters 146",
-      "contest_start_date": "07 Aug 2024  20:00:00",
-      "contest_end_date": "07 Aug 2024  22:00:00",
-      "contest_start_date_iso": "2024-08-07T20:00:00+05:30",
-      "contest_end_date_iso": "2024-08-07T22:00:00+05:30",
-      "contest_duration": "120",
-      "distinct_users": 0
-    }
-  ]
+        {
+            "contest_code": "START146D",
+            "contest_name": "Starters 146",
+            "contest_start_date": "07 Aug 2024  20:00:00",
+            "contest_end_date": "07 Aug 2024  22:00:00",
+            "contest_start_date_iso": "2024-08-07T20:00:00+05:30",
+            "contest_end_date_iso": "2024-08-07T22:00:00+05:30",
+            "contest_duration": "120",
+            "distinct_users": 0
+        },
+        {
+            "contest_code": "START147D",
+            "contest_name": "Starters 147",
+            "contest_start_date": "14 Aug 2024  20:00:00",
+            "contest_end_date": "14 Aug 2024  22:00:00",
+            "contest_start_date_iso": "2024-08-14T20:00:00+05:30",
+            "contest_end_date_iso": "2024-08-14T22:00:00+05:30",
+            "contest_duration": "120",
+            "distinct_users": 0
+        }
+    ]
 
     const timeOfNextChefContest = new Date(contests[0].contest_start_date);
     let timeInMilliseconds = timeOfNextChefContest.getTime();
