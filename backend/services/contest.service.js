@@ -14,16 +14,6 @@ const getChefContests = async () => {
     // console.log('CodeChef contests:', JSON.stringify(contests, null, 2));
     const contests = [
         {
-            "contest_code": "START146D",
-            "contest_name": "Starters 146",
-            "contest_start_date": "07 Aug 2024  20:00:00",
-            "contest_end_date": "07 Aug 2024  22:00:00",
-            "contest_start_date_iso": "2024-08-07T20:00:00+05:30",
-            "contest_end_date_iso": "2024-08-07T22:00:00+05:30",
-            "contest_duration": "120",
-            "distinct_users": 0
-        },
-        {
             "contest_code": "START147D",
             "contest_name": "Starters 147",
             "contest_start_date": "14 Aug 2024  20:00:00",
