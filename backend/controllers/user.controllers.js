@@ -53,32 +53,23 @@ const userLogUp = async (req, res) => {
 };
 
 const userLogin = async (req, res) => {
-  try {
-    const { email, password } = req.body;
+  const { email, password } = req.body
+  if (!email || email === "")
+    res.status(400).json({ "message": "Email is required" })
+  if (!password || password === "")
+    res.status(400).json({ "message": "Password is required" })
 
-    if (!email || email === "") {
-      return res.status(400).json({ message: "Email is required" });
-    }
+  const user = await User.findOne({
+    email: email
+  })
 
-    if (!password || password === "") {
-      return res.status(400).json({ message: "Password is required" });
-    }
-
-    const user = await User.findOne({ email });
-
-    if (!user) {
-      return res.status(400).json({ message: "Error could not find emailID" });
-    }
-
-    const isPasswordOk = await user.isPasswordCorrect(password);
-
-    if (!isPasswordOk) {
-      return res.status(400).json({ message: "Password Incorrect!" });
-    }
-
-    return res.status(200).json(user);
-  } catch (error) {
-    return res.status(500).json({ message: "Server error", error: error.message });
+  if (!user)
+    res.status(400).json({ "message": "Error could not find emailID" })
+  if (user) {
+    const isPasswordOk = await user.isPasswordCorrect(password)
+    if (!isPasswordOk)
+      res.status(400).json({ "message": "Password Incorrect!" })
+    res.status(200).json(user)
   }
 };
 
