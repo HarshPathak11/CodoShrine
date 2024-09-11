@@ -13,27 +13,27 @@ const getChefContests = async () => {
     // const response = await axios.get(`https://www.codechef.com/api/list/contests/all?sort_by=START&sorting_order=asc&offset=0&mode=all`);
     // console.log('CodeChef contests:', JSON.stringify(contests, null, 2));
     const contests = [
-{
-"contest_code": "START150",
-"contest_name": "Starters 150",
-"contest_start_date": "04 Sep 2024  20:00:00",
-"contest_end_date": "04 Sep 2024  22:00:00",
-"contest_start_date_iso": "2024-09-04T20:00:00+05:30",
-"contest_end_date_iso": "2024-09-04T22:00:00+05:30",
-"contest_duration": "120",
-"distinct_users": 0
-},
-{
-"contest_code": "START151",
-"contest_name": "Starters 150",
-"contest_start_date": "11 Sep 2024  20:00:00",
-"contest_end_date": "11 Sep 2024  22:00:00",
-"contest_start_date_iso": "2024-09-11T20:00:00+05:30",
-"contest_end_date_iso": "2024-09-11T22:00:00+05:30",
-"contest_duration": "120",
-"distinct_users": 0
-}
-]
+        {
+            "contest_code": "START151",
+            "contest_name": "Starters 151 (Rated til 5 stars)",
+            "contest_start_date": "11 Sep 2024  20:00:00",
+            "contest_end_date": "11 Sep 2024  22:00:00",
+            "contest_start_date_iso": "2024-09-11T20:00:00+05:30",
+            "contest_end_date_iso": "2024-09-11T22:00:00+05:30",
+            "contest_duration": "120",
+            "distinct_users": 0
+        },
+        {
+            "contest_code": "START152",
+            "contest_name": "Starters 152",
+            "contest_start_date": "18 Sep 2024  20:00:00",
+            "contest_end_date": "18 Sep 2024  22:00:00",
+            "contest_start_date_iso": "2024-09-18T20:00:00+05:30",
+            "contest_end_date_iso": "2024-09-18T22:00:00+05:30",
+            "contest_duration": "120",
+            "distinct_users": 0
+        }
+    ]
 
     const timeOfNextChefContest = new Date(contests[0].contest_start_date);
     let timeInMilliseconds = timeOfNextChefContest.getTime();
