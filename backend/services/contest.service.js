@@ -3,8 +3,8 @@ import sendEmailToAllUsers from './email.service.js';
 import { User } from '../model/user.model.js';
 
 // const maxTime = 1 * 60 * 60 * 1000;
-const maxTime = 40 * 60 * 1000;
-const minTime = 35 * 60 * 1000; // minimum time difference to send the email
+const maxTime = 60 * 60 * 1000;
+const minTime = 55 * 60 * 1000; // minimum time difference to send the email
 
 const initialBiweeklyDate = new Date('2024-07-20T20:00:00+05:30'); // 20th July 2024, 8:00 PM IST
 
@@ -14,22 +14,22 @@ const getChefContests = async () => {
     // console.log('CodeChef contests:', JSON.stringify(contests, null, 2));
     const contests = [
         {
-            "contest_code": "START151",
-            "contest_name": "Starters 151 (Rated til 5 stars)",
-            "contest_start_date": "11 Sep 2024  20:00:00",
-            "contest_end_date": "11 Sep 2024  22:00:00",
-            "contest_start_date_iso": "2024-09-11T20:00:00+05:30",
-            "contest_end_date_iso": "2024-09-11T22:00:00+05:30",
-            "contest_duration": "120",
-            "distinct_users": 0
-        },
-        {
             "contest_code": "START152",
             "contest_name": "Starters 152",
             "contest_start_date": "18 Sep 2024  20:00:00",
             "contest_end_date": "18 Sep 2024  22:00:00",
             "contest_start_date_iso": "2024-09-18T20:00:00+05:30",
             "contest_end_date_iso": "2024-09-18T22:00:00+05:30",
+            "contest_duration": "120",
+            "distinct_users": 0
+        },
+        {
+            "contest_code": "START153",
+            "contest_name": "Starters 153",
+            "contest_start_date": "25 Sep 2024  20:00:00",
+            "contest_end_date": "25 Sep 2024  22:00:00",
+            "contest_start_date_iso": "2024-09-25T20:00:00+05:30",
+            "contest_end_date_iso": "2024-09-25T22:00:00+05:30",
             "contest_duration": "120",
             "distinct_users": 0
         }
